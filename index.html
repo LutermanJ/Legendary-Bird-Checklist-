@@ -62,8 +62,36 @@ small.hint { display:block; color:#666; margin-top:.2rem; }
   #storageWarning { background:#2a1113; border-color:#7a3035; color:#f4d7da; }
 }
 .hidden { display:none !important; }
-</style></head>
+</style>
+<style>
+body { background-color: #121212; color: #f0f0f0; font-family: Arial, sans-serif; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 0.5rem; background: #1e1e1e; padding: 0.5rem; position: sticky; top: 0; z-index: 10; }
+.toolbar input, .toolbar select, .toolbar button { padding: 0.5rem; border-radius: 5px; border: none; }
+ul { list-style: none; padding: 0; }
+li { display: flex; align-items: center; padding: 0.2rem 0; }
+label { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+h2 { margin-top: 1.5rem; }
+.counter { font-size: 0.9rem; margin-left: 0.5rem; color: #bbb; }
+</style>
+
+</head>
 <body>
+
+<div class="toolbar">
+  <input type="text" id="searchBox" placeholder="Search cards...">
+  <select id="langFilter">
+    <option value="all">All</option>
+    <option value="en">EN</option>
+    <option value="jp">JP</option>
+  </select>
+  <button id="addCardBtn">Add</button>
+  <button id="exportBtn">Export</button>
+  <button id="importBtn">Import</button>
+  <input type="file" id="importFile" style="display:none" accept=".json">
+  <button id="clearBtn">Clear</button>
+  <span id="liveCounter"></span>
+</div>
+
 <div class="toolbar"><strong>Legendary Bird Checklist</strong><input id="q" placeholder="Search name, set, number…" type="search"/><select id="langFilter"><option value="all">All langs</option><option value="EN">English only</option><option value="JP">Japanese only</option></select><button id="btnExport">Export</button><button id="btnImport">Import</button><button id="btnClear">Clear</button><input accept=".json" id="importFile" style="display:none" type="file"/><small class="hint">Tip: Add to Home Screen for app-like experience. Export to back up progress.</small><div id="storageWarning">Safari preview can’t save data. Open this link in Safari, then Share → Add to Home Screen to persist checkmarks.</div><span id="saveStatus"></span></div><h1>Zapdos, Articuno &amp; Moltres Card Checklist</h1>
 <section><h2>Zapdos cards</h2><ul>
 <li data-lang="EN"><label for="cb_f653fd37a3fb61e8"><input data-key="f653fd37a3fb61e8" id="cb_f653fd37a3fb61e8" type="checkbox"/> Zapdos (Base Set) — Base Set 16/102 — Holo (Rare) — EN</label></li>
@@ -555,7 +583,135 @@ small.hint { display:block; color:#666; margin-top:.2rem; }
 })();</script><script>
 
 // Legendary Bird Checklist add-on: counters + add-a-card (persists to localStorage)
-// Drop this file in your repo and include it in index.html before </body>:
+// Drop this file in your repo and include it in index.html before 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const liveCounter = document.getElementById('liveCounter');
+
+    function updateTotals() {
+        let totalChecked = 0;
+        let totalAll = 0;
+        document.querySelectorAll('section').forEach(section => {
+            const boxes = section.querySelectorAll('input[type="checkbox"]');
+            const checked = section.querySelectorAll('input[type="checkbox"]:checked').length;
+            totalChecked += checked;
+            totalAll += boxes.length;
+            let header = section.querySelector('h2');
+            if (header) {
+                let counterSpan = header.querySelector('.counter');
+                if (!counterSpan) {
+                    counterSpan = document.createElement('span');
+                    counterSpan.className = 'counter';
+                    header.appendChild(counterSpan);
+                }
+                counterSpan.textContent = `(${checked} / ${boxes.length})`;
+            }
+        });
+        liveCounter.textContent = `Total: ${totalChecked} / ${totalAll}`;
+    }
+
+    // Load saved state
+    checkboxes.forEach((box, idx) => {
+        const saved = localStorage.getItem('card_' + idx);
+        if (saved === 'true') box.checked = true;
+        box.addEventListener('change', () => {
+            localStorage.setItem('card_' + idx, box.checked);
+            updateTotals();
+        });
+    });
+
+    // Search
+    document.getElementById('searchBox').addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        document.querySelectorAll('li').forEach(li => {
+            li.style.display = li.textContent.toLowerCase().includes(query) ? '' : 'none';
+        });
+    });
+
+    // Language filter (assuming "EN" or "JP" appears in label text)
+    document.getElementById('langFilter').addEventListener('change', function() {
+        const val = this.value;
+        document.querySelectorAll('li').forEach(li => {
+            if (val === 'all' || li.textContent.includes(val)) {
+                li.style.display = '';
+            } else {
+                li.style.display = 'none';
+            }
+        });
+    });
+
+    // Add card
+    document.getElementById('addCardBtn').addEventListener('click', function() {
+        const name = prompt('Enter card name:');
+        if (!name) return;
+        const sectionName = prompt('Enter section (Zapdos, Articuno, Moltres, Other):');
+        const section = Array.from(document.querySelectorAll('section')).find(s => s.querySelector('h2').textContent.toLowerCase().includes(sectionName.toLowerCase()));
+        if (section) {
+            const li = document.createElement('li');
+            const label = document.createElement('label');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(name));
+            li.appendChild(label);
+            section.querySelector('ul').appendChild(li);
+            updateTotals();
+        }
+    });
+
+    // Export
+    document.getElementById('exportBtn').addEventListener('click', function() {
+        const data = {};
+        checkboxes.forEach((box, idx) => {
+            data['card_' + idx] = box.checked;
+        });
+        const blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'checklist_backup.json';
+        a.click();
+        URL.revokeObjectURL(url);
+    });
+
+    // Import
+    document.getElementById('importBtn').addEventListener('click', function() {
+        document.getElementById('importFile').click();
+    });
+    document.getElementById('importFile').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            const data = JSON.parse(ev.target.result);
+            checkboxes.forEach((box, idx) => {
+                if (data['card_' + idx] !== undefined) {
+                    box.checked = data['card_' + idx];
+                    localStorage.setItem('card_' + idx, box.checked);
+                }
+            });
+            updateTotals();
+        };
+        reader.readAsText(file);
+    });
+
+    // Clear
+    document.getElementById('clearBtn').addEventListener('click', function() {
+        if (confirm('Clear all checks?')) {
+            checkboxes.forEach((box, idx) => {
+                box.checked = false;
+                localStorage.removeItem('card_' + idx);
+            });
+            updateTotals();
+        }
+    });
+
+    updateTotals();
+});
+</script>
+
+</body>:
 //   <script src="lb-addon.js?v=1"></script>
 (function(){
   // ---- Inject styles ----
@@ -779,4 +935,132 @@ small.hint { display:block; color:#666; margin-top:.2rem; }
 })();
 
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const liveCounter = document.getElementById('liveCounter');
+
+    function updateTotals() {
+        let totalChecked = 0;
+        let totalAll = 0;
+        document.querySelectorAll('section').forEach(section => {
+            const boxes = section.querySelectorAll('input[type="checkbox"]');
+            const checked = section.querySelectorAll('input[type="checkbox"]:checked').length;
+            totalChecked += checked;
+            totalAll += boxes.length;
+            let header = section.querySelector('h2');
+            if (header) {
+                let counterSpan = header.querySelector('.counter');
+                if (!counterSpan) {
+                    counterSpan = document.createElement('span');
+                    counterSpan.className = 'counter';
+                    header.appendChild(counterSpan);
+                }
+                counterSpan.textContent = `(${checked} / ${boxes.length})`;
+            }
+        });
+        liveCounter.textContent = `Total: ${totalChecked} / ${totalAll}`;
+    }
+
+    // Load saved state
+    checkboxes.forEach((box, idx) => {
+        const saved = localStorage.getItem('card_' + idx);
+        if (saved === 'true') box.checked = true;
+        box.addEventListener('change', () => {
+            localStorage.setItem('card_' + idx, box.checked);
+            updateTotals();
+        });
+    });
+
+    // Search
+    document.getElementById('searchBox').addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        document.querySelectorAll('li').forEach(li => {
+            li.style.display = li.textContent.toLowerCase().includes(query) ? '' : 'none';
+        });
+    });
+
+    // Language filter (assuming "EN" or "JP" appears in label text)
+    document.getElementById('langFilter').addEventListener('change', function() {
+        const val = this.value;
+        document.querySelectorAll('li').forEach(li => {
+            if (val === 'all' || li.textContent.includes(val)) {
+                li.style.display = '';
+            } else {
+                li.style.display = 'none';
+            }
+        });
+    });
+
+    // Add card
+    document.getElementById('addCardBtn').addEventListener('click', function() {
+        const name = prompt('Enter card name:');
+        if (!name) return;
+        const sectionName = prompt('Enter section (Zapdos, Articuno, Moltres, Other):');
+        const section = Array.from(document.querySelectorAll('section')).find(s => s.querySelector('h2').textContent.toLowerCase().includes(sectionName.toLowerCase()));
+        if (section) {
+            const li = document.createElement('li');
+            const label = document.createElement('label');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(name));
+            li.appendChild(label);
+            section.querySelector('ul').appendChild(li);
+            updateTotals();
+        }
+    });
+
+    // Export
+    document.getElementById('exportBtn').addEventListener('click', function() {
+        const data = {};
+        checkboxes.forEach((box, idx) => {
+            data['card_' + idx] = box.checked;
+        });
+        const blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'checklist_backup.json';
+        a.click();
+        URL.revokeObjectURL(url);
+    });
+
+    // Import
+    document.getElementById('importBtn').addEventListener('click', function() {
+        document.getElementById('importFile').click();
+    });
+    document.getElementById('importFile').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            const data = JSON.parse(ev.target.result);
+            checkboxes.forEach((box, idx) => {
+                if (data['card_' + idx] !== undefined) {
+                    box.checked = data['card_' + idx];
+                    localStorage.setItem('card_' + idx, box.checked);
+                }
+            });
+            updateTotals();
+        };
+        reader.readAsText(file);
+    });
+
+    // Clear
+    document.getElementById('clearBtn').addEventListener('click', function() {
+        if (confirm('Clear all checks?')) {
+            checkboxes.forEach((box, idx) => {
+                box.checked = false;
+                localStorage.removeItem('card_' + idx);
+            });
+            updateTotals();
+        }
+    });
+
+    updateTotals();
+});
+</script>
+
 </body></html>
