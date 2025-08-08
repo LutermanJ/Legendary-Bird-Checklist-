@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Legendary Birds Checklist</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 0; padding: 1rem; }
+h1, h2 { color: #333; }
+section { margin-bottom: 2rem; }
+ul { list-style: none; padding: 0; margin: 0; }
+li { margin-bottom: 0.5rem; }
+label { display: flex; flex-wrap: wrap; align-items: center; }
+input[type=checkbox] { margin-right: 0.5rem; }
+.price { font-style: italic; color: #555; margin-left: 0.5rem; }
+</style>
+<style>
+.toolbar { position: sticky; top: 0; background:#fff; padding: .5rem; border-bottom: 1px solid #eee; z-index: 10; }
+.toolbar button { padding:.5rem .7rem; margin-right:.4rem; border:1px solid #ccc; border-radius:6px; background:#f8f8f8; }
+small.hint { display:block; color:#666; margin-top:.25rem; }
+section h2 { margin-top: 1.25rem; }
+li.checked label { opacity: .75; text-decoration: none; }
+@media (prefers-color-scheme: dark) {
+  body { background:#0f1115; color:#e6e6e6; }
+  h1, h2 { color:#fff; }
+  .toolbar { background:#0f1115; border-color:#333; }
+  .toolbar button { background:#1a1d24; color:#e6e6e6; border-color:#333; }
+  .price { color:#c7c7c7; }
+}
+</style><style>
+#saveStatus { margin-left:.5rem; font-size:.9rem; color:#1a7f37; }
+#storageWarning { display:none; margin-top:.5rem; padding:.6rem .7rem; border:1px solid #f5c2c7; border-radius:8px; background:#fff5f6; color:#7a3035; }
+@media (prefers-color-scheme: dark) {
+  #storageWarning { background:#2a1113; border-color:#7a3035; color:#f4d7da; }
+}
+</style><style>
+/* Mobile-first compact styles */
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 0; padding: 0.75rem; }
+h1 { font-size: 1.1rem; margin: 0 0 0.5rem; }
+h2 { font-size: 1rem; margin: 1rem 0 0.5rem; }
+section { margin-bottom: 1rem; }
+ul { list-style: none; padding: 0; margin: 0; }
+li { margin: 0; padding: 0.2rem 0; }
+label { display: flex; flex-wrap: wrap; align-items: center; line-height: 1.2; }
+input[type=checkbox] { width: 18px; height: 18px; margin-right: 0.5rem; }
+.toolbar { position: sticky; top: 0; background:#fff; padding: .5rem; border-bottom: 1px solid #eee; z-index: 10; display:flex; gap:.4rem; flex-wrap:wrap; align-items:center; }
+.toolbar button, .toolbar input, .toolbar select { padding: .45rem .6rem; border: 1px solid #ccc; border-radius: 8px; background: #f8f8f8; font-size: .9rem; }
+.toolbar input[type=search] { flex: 1 1 160px; background:#fff; }
+.tag { font-size: .75rem; opacity:.75; margin-left:.35rem; }
+small.hint { display:block; color:#666; margin-top:.2rem; }
+#saveStatus { margin-left:auto; font-size:.9rem; color:#1a7f37; }
+#storageWarning { display:none; margin-top:.25rem; padding:.45rem .6rem; border:1px solid #f5c2c7; border-radius:8px; background:#fff5f6; color:#7a3035; width:100%; }
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  body { background:#0f1115; color:#e6e6e6; }
+  h1, h2 { color:#fff; }
+  .toolbar { background:#0f1115; border-color:#333; }
+  .toolbar button, .toolbar input, .toolbar select { background:#1a1d24; color:#e6e6e6; border-color:#333; }
+  .tag { color:#c7c7c7; }
+  #storageWarning { background:#2a1113; border-color:#7a3035; color:#f4d7da; }
+}
+.hidden { display:none !important; }
+</style></head>
+<body>
+<div class="toolbar"><strong>Legendary Bird Checklist</strong><input id="q" placeholder="Search name, set, number…" type="search"/><select id="langFilter"><option value="all">All langs</option><option value="EN">English only</option><option value="JP">Japanese only</option></select><button id="btnExport">Export</button><button id="btnImport">Import</button><button id="btnClear">Clear</button><input accept=".json" id="importFile" style="display:none" type="file"/><small class="hint">Tip: Add to Home Screen for app-like experience. Export to back up progress.</small><div id="storageWarning">Safari preview can’t save data. Open this link in Safari, then Share → Add to Home Screen to persist checkmarks.</div><span id="saveStatus"></span></div><h1>Zapdos, Articuno &amp; Moltres Card Checklist</h1>
+<section><h2>Zapdos cards</h2><ul>
+<li data-lang="EN"><label for="cb_f653fd37a3fb61e8"><input data-key="f653fd37a3fb61e8" id="cb_f653fd37a3fb61e8" type="checkbox"/> Zapdos (Base Set) — Base Set 16/102 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_b5a5b44b4237df5e"><input data-key="b5a5b44b4237df5e" id="cb_b5a5b44b4237df5e" type="checkbox"/> Zapdos (Base Set) — Expansion Pack – no.# — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_77c6e425892c4d05"><input data-key="77c6e425892c4d05" id="cb_77c6e425892c4d05" type="checkbox"/> Zapdos (Base Set 2) — Base Set 2 20/130 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_8c54eea0015c45f4"><input data-key="8c54eea0015c45f4" id="cb_8c54eea0015c45f4" type="checkbox"/> Zapdos (Legendary Collection) — Legendary Collection 19/110 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_aa8708de3fd01ba8"><input data-key="aa8708de3fd01ba8" id="cb_aa8708de3fd01ba8" type="checkbox"/> Zapdos (Legendary Collection – Reverse) — Legendary Collection 19/110 — Reverse‑Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_fc03aa5941078bc1"><input data-key="fc03aa5941078bc1" id="cb_fc03aa5941078bc1" type="checkbox"/> Zapdos (Fossil – Holo) — Fossil 15/62 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_4427cec62bcb5487"><input data-key="4427cec62bcb5487" id="cb_4427cec62bcb5487" type="checkbox"/> Zapdos (Fossil – Holo) — Mystery of the Fossils – no.# — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_a06b3eefa0532964"><input data-key="a06b3eefa0532964" id="cb_a06b3eefa0532964" type="checkbox"/> Zapdos (Fossil – Non‑Holo) — Fossil 30/62 — Non‑Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_52ece81edc5934d8"><input data-key="52ece81edc5934d8" id="cb_52ece81edc5934d8" type="checkbox"/> Zapdos (Fossil – Non‑Holo) — Mystery of the Fossils – no.# — Non‑Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_74a1bd20fcfa4510"><input data-key="74a1bd20fcfa4510" id="cb_74a1bd20fcfa4510" type="checkbox"/> Rocket’s Zapdos (Gym Challenge) — Gym Challenge 15/132 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_4abd5787a4cf2362"><input data-key="4abd5787a4cf2362" id="cb_4abd5787a4cf2362" type="checkbox"/> Rocket’s Zapdos (Japanese set) — Challenge from the Darkness – no.# — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_79067afab57ee82f"><input data-key="79067afab57ee82f" id="cb_79067afab57ee82f" type="checkbox"/> Zapdos (Black Star Promo #23) — Wizards Promo 23 — Promo Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_614352231464c3e4"><input data-key="614352231464c3e4" id="cb_614352231464c3e4" type="checkbox"/> Zapdos (Unnumbered Promo) — Unnumbered Promo – no.# — Promo Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_7dbff5bdb3610694"><input data-key="7dbff5bdb3610694" id="cb_7dbff5bdb3610694" type="checkbox"/> Zapdos (Vending Machine) — Expansion Sheet 2 – no.# — Non‑Holo (Uncommon) — JP</label></li>
+<li data-lang="EN"><label for="cb_060ed6bb24e0b589"><input data-key="060ed6bb24e0b589" id="cb_060ed6bb24e0b589" type="checkbox"/> Zapdos (Aquapolis Crystal) — Aquapolis H32/H32 — Crystal‑type Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_d18434fdee08ced8"><input data-key="d18434fdee08ced8" id="cb_d18434fdee08ced8" type="checkbox"/> Zapdos (Aquapolis) — The Town on No Map 038/087 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_3f6b40460d310f8c"><input data-key="3f6b40460d310f8c" id="cb_3f6b40460d310f8c" type="checkbox"/> Zapdos (Aquapolis – Reverse) — Aquapolis 44/147 — Reverse‑Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_45bbb254e879b292"><input data-key="45bbb254e879b292" id="cb_45bbb254e879b292" type="checkbox"/> Zapdos (P Promos) — P Promos 24/47 — Promo Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_8cd3f1c83dcb28cd"><input data-key="8cd3f1c83dcb28cd" id="cb_8cd3f1c83dcb28cd" type="checkbox"/> Zapdos ex (EX FireRed &amp; LeafGreen) — EX FireRed &amp; LeafGreen 116/112 — Ultra Rare ex — EN</label></li>
+<li data-lang="JP"><label for="cb_096fc6424275ffa2"><input data-key="096fc6424275ffa2" id="cb_096fc6424275ffa2" type="checkbox"/> Zapdos ex (Japanese) — Flight of Legends 037/053 — Ultra Rare ex — JP</label></li>
+<li data-lang="EN"><label for="cb_ec0a959c7410db98"><input data-key="ec0a959c7410db98" id="cb_ec0a959c7410db98" type="checkbox"/> Rocket’s Zapdos ex — EX Team Rocket Returns 106/109 — Ultra Rare ex — EN</label></li>
+<li data-lang="JP"><label for="cb_c93649b6baddb5a9"><input data-key="c93649b6baddb5a9" id="cb_c93649b6baddb5a9" type="checkbox"/> Rocket’s Zapdos ex (Japanese) — Rocket Gang Returns 089/084 — Ultra Rare ex — JP</label></li>
+<li data-lang="EN"><label for="cb_16280956fcda6daa"><input data-key="16280956fcda6daa" id="cb_16280956fcda6daa" type="checkbox"/> Zapdos ex (Nintendo Promo) — Nintendo Promo 033 — Promo ex — EN</label></li>
+<li data-lang="JP"><label for="cb_2df407cd69ee084f"><input data-key="2df407cd69ee084f" id="cb_2df407cd69ee084f" type="checkbox"/> Zapdos ex (Nintendo Promo) — PCG‑P Promo 024 — Promo ex — JP</label></li>
+<li data-lang="EN"><label for="cb_a46d4029e9892c03"><input data-key="a46d4029e9892c03" id="cb_a46d4029e9892c03" type="checkbox"/> Zapdos (Majestic Dawn – Holo) — Majestic Dawn 14/100 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_29cb33a5c3c6b2fe"><input data-key="29cb33a5c3c6b2fe" id="cb_29cb33a5c3c6b2fe" type="checkbox"/> Zapdos (Moonlit Pursuit) — Moonlit Pursuit 014/100 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_de905c8b91502890"><input data-key="de905c8b91502890" id="cb_de905c8b91502890" type="checkbox"/> Zapdos (Majestic Dawn – Reverse) — Majestic Dawn 14/100 — Reverse‑Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_0aecfffd61fffef2"><input data-key="0aecfffd61fffef2" id="cb_0aecfffd61fffef2" type="checkbox"/> Zapdos (Supreme Victors – Holo) — Supreme Victors 48/147 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_ff1ec1bf91ee5240"><input data-key="ff1ec1bf91ee5240" id="cb_ff1ec1bf91ee5240" type="checkbox"/> Zapdos (Beat of the Frontier) — Beat of the Frontier 035/090 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_ed2f1fb29b1b0395"><input data-key="ed2f1fb29b1b0395" id="cb_ed2f1fb29b1b0395" type="checkbox"/> Zapdos (Supreme Victors – Reverse) — Supreme Victors 48/147 — Reverse‑Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_8c0ea8ed9dddb5c1"><input data-key="8c0ea8ed9dddb5c1" id="cb_8c0ea8ed9dddb5c1" type="checkbox"/> Zapdos (Supreme Victors – Secret) — Supreme Victors 150/147 — Secret Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_84b15b6e701fce16"><input data-key="84b15b6e701fce16" id="cb_84b15b6e701fce16" type="checkbox"/> Zapdos (Secret in JP) — Beat of the Frontier 092/090 — Secret Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_11223cafaf130a4d"><input data-key="11223cafaf130a4d" id="cb_11223cafaf130a4d" type="checkbox"/> Zapdos (Arceus) — Arceus 12/99 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_3017a02e392fbaf7"><input data-key="3017a02e392fbaf7" id="cb_3017a02e392fbaf7" type="checkbox"/> Zapdos (JP Arceus) — Advent of Arceus 012/090 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_28221f5ecc1652f0"><input data-key="28221f5ecc1652f0" id="cb_28221f5ecc1652f0" type="checkbox"/> Zapdos (Pokémon Rumble) — Pokémon Rumble 8/16 — Promo Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_089e9edb73d1190b"><input data-key="089e9edb73d1190b" id="cb_089e9edb73d1190b" type="checkbox"/> Zapdos (Japanese Rumble) — Rumble JP 008/016 — Promo Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_df2eeb10942ba104"><input data-key="df2eeb10942ba104" id="cb_df2eeb10942ba104" type="checkbox"/> Zapdos (Next Destinies) — Next Destinies 41/99 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_cce8f52701303819"><input data-key="cce8f52701303819" id="cb_cce8f52701303819" type="checkbox"/> Zapdos (Psychic Shock) — Psycho Shock 022/076 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_0581a4de47d2bbc1"><input data-key="0581a4de47d2bbc1" id="cb_0581a4de47d2bbc1" type="checkbox"/> Zapdos (Plasma Storm) — Plasma Storm 48/135 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_2fcc8794b29eb272"><input data-key="2fcc8794b29eb272" id="cb_2fcc8794b29eb272" type="checkbox"/> Zapdos (Plasma Storm – Reverse) — Plasma Storm 48/135 — Reverse‑Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_19bff60827b738cf"><input data-key="19bff60827b738cf" id="cb_19bff60827b738cf" type="checkbox"/> Zapdos (Plasma Storm) — Plasma Storm 034/076 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_efc7e848331639cc"><input data-key="efc7e848331639cc" id="cb_efc7e848331639cc" type="checkbox"/> Zapdos (Legendary Treasures) — Legendary Treasures 46/113 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_984342b6b2a5ba83"><input data-key="984342b6b2a5ba83" id="cb_984342b6b2a5ba83" type="checkbox"/> Zapdos (Legendary Shine) — Legendary Shine 047/072 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_27f6f75d3c388ea1"><input data-key="27f6f75d3c388ea1" id="cb_27f6f75d3c388ea1" type="checkbox"/> Zapdos (Roaring Skies – Holo) — Roaring Skies 23/108 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_75665f7aa614a339"><input data-key="75665f7aa614a339" id="cb_75665f7aa614a339" type="checkbox"/> Zapdos (Double Crisis) — Double Crisis 020/034 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_5a605284c521ccfd"><input data-key="5a605284c521ccfd" id="cb_5a605284c521ccfd" type="checkbox"/> Zapdos (Roaring Skies – Reverse) — Roaring Skies 23/108 — Reverse‑Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_541069e55133137b"><input data-key="541069e55133137b" id="cb_541069e55133137b" type="checkbox"/> Zapdos (Generations) — Generations 29/83 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_23fd2518a2e42900"><input data-key="23fd2518a2e42900" id="cb_23fd2518a2e42900" type="checkbox"/> Zapdos (Generations – Reverse) — Generations 29/83 — Reverse‑Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_32a46ad62d0e28e0"><input data-key="32a46ad62d0e28e0" id="cb_32a46ad62d0e28e0" type="checkbox"/> Zapdos (Break Starter) — BREAK Starter 020/072 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_0941220aec275c45"><input data-key="0941220aec275c45" id="cb_0941220aec275c45" type="checkbox"/> Zapdos (Evolutions – Holo) — Evolutions 42/108 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_52ea47b3f5d94f95"><input data-key="52ea47b3f5d94f95" id="cb_52ea47b3f5d94f95" type="checkbox"/> Zapdos (Evolutions – Reverse) — Evolutions 42/108 — Reverse‑Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_9e2c995ca7bcc7a8"><input data-key="9e2c995ca7bcc7a8" id="cb_9e2c995ca7bcc7a8" type="checkbox"/> Zapdos (CP6) — Expansion 20th Anniversary 027/087 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_d756f7bd528c6469"><input data-key="d756f7bd528c6469" id="cb_d756f7bd528c6469" type="checkbox"/> Zapdos (Team Up) — Team Up 40/181 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_b253721922b0455c"><input data-key="b253721922b0455c" id="cb_b253721922b0455c" type="checkbox"/> Zapdos (Team Up – Reverse) — Team Up 40/181 — Reverse‑Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_db0fc139d79a8015"><input data-key="db0fc139d79a8015" id="cb_db0fc139d79a8015" type="checkbox"/> Zapdos (Tag Bolt) — Tag Bolt 055/095 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_5eaf934c012dcb19"><input data-key="5eaf934c012dcb19" id="cb_5eaf934c012dcb19" type="checkbox"/> Zapdos (Hidden Fates) — Hidden Fates 24/68 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_4eaeb0eca420ad29"><input data-key="4eaeb0eca420ad29" id="cb_4eaeb0eca420ad29" type="checkbox"/> Zapdos (Hidden Fates – Reverse) — Hidden Fates 24/68 — Reverse‑Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_d164c3e1fe319678"><input data-key="d164c3e1fe319678" id="cb_d164c3e1fe319678" type="checkbox"/> Zapdos (High Class Pack Shiny GX) — High Class Pack Shiny GX 024/094 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_1d0ecee53b741491"><input data-key="1d0ecee53b741491" id="cb_1d0ecee53b741491" type="checkbox"/> Moltres &amp; Zapdos &amp; Articuno GX — Hidden Fates 44/68 — Ultra Rare GX — EN</label></li>
+<li data-lang="JP"><label for="cb_07bdc932fb954872"><input data-key="07bdc932fb954872" id="cb_07bdc932fb954872" type="checkbox"/> Moltres &amp; Zapdos &amp; Articuno GX — High Class Pack Shiny GX 100/094 — Ultra Rare GX — JP</label></li>
+<li data-lang="EN"><label for="cb_74dfc73aa82c8a63"><input data-key="74dfc73aa82c8a63" id="cb_74dfc73aa82c8a63" type="checkbox"/> Moltres &amp; Zapdos &amp; Articuno GX (Full Art) — Hidden Fates 66/68 — Full Art GX — EN</label></li>
+<li data-lang="JP"><label for="cb_0f1788698b7727d9"><input data-key="0f1788698b7727d9" id="cb_0f1788698b7727d9" type="checkbox"/> Moltres &amp; Zapdos &amp; Articuno GX (FA) — High Class Pack Shiny GX 238/173 — Full Art GX — JP</label></li>
+<li data-lang="EN"><label for="cb_5262efa4564a3746"><input data-key="5262efa4564a3746" id="cb_5262efa4564a3746" type="checkbox"/> Moltres &amp; Zapdos &amp; Articuno GX (Rainbow) — Hidden Fates 69/68 — Rainbow Secret Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_63a382b51e3dec65"><input data-key="63a382b51e3dec65" id="cb_63a382b51e3dec65" type="checkbox"/> Moltres &amp; Zapdos &amp; Articuno GX (Rainbow) — High Class Pack Shiny GX 239/173 — Rainbow Secret Rare — JP</label></li>
+<li data-lang="JP"><label for="cb_7314b7338d91be8b"><input data-key="7314b7338d91be8b" id="cb_7314b7338d91be8b" type="checkbox"/> Moltres &amp; Zapdos &amp; Articuno GX (Tag All Stars) — Tag All Stars 226/173 — Special Art Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_416b80d8389c05d6"><input data-key="416b80d8389c05d6" id="cb_416b80d8389c05d6" type="checkbox"/> Zapdos (SM Promo SM145) — SM Black Star Promo SM145 — Promo Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_3df930d36da48aa5"><input data-key="3df930d36da48aa5" id="cb_3df930d36da48aa5" type="checkbox"/> Zapdos (SM Promo SM159 – Staff) — SM Black Star Promo SM159 — Staff Promo Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_5ffa1538d4403ff0"><input data-key="5ffa1538d4403ff0" id="cb_5ffa1538d4403ff0" type="checkbox"/> Zapdos (Vivid Voltage) — Vivid Voltage 48/185 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_c2a29686168b3aa7"><input data-key="c2a29686168b3aa7" id="cb_c2a29686168b3aa7" type="checkbox"/> Zapdos (Vivid Voltage – Reverse) — Vivid Voltage 48/185 — Reverse‑Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_a11e25b0efb7fa9e"><input data-key="a11e25b0efb7fa9e" id="cb_a11e25b0efb7fa9e" type="checkbox"/> Zapdos (Amazing Volt Tackle) — Amazing Volt Tackle 035/100 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_0a7c4f499201b781"><input data-key="0a7c4f499201b781" id="cb_0a7c4f499201b781" type="checkbox"/> Galarian Zapdos V (Chilling Reign) — Chilling Reign 080/198 — Ultra Rare V — EN</label></li>
+<li data-lang="JP"><label for="cb_867388e21fcda491"><input data-key="867388e21fcda491" id="cb_867388e21fcda491" type="checkbox"/> Galarian Zapdos V — Silver Lance 037/070 — Ultra Rare V — JP</label></li>
+<li data-lang="EN"><label for="cb_4714c56b90e7870b"><input data-key="4714c56b90e7870b" id="cb_4714c56b90e7870b" type="checkbox"/> Galarian Zapdos V (Full Art) — Chilling Reign 173/198 — Full Art Ultra Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_37ad09dfb1aa95fe"><input data-key="37ad09dfb1aa95fe" id="cb_37ad09dfb1aa95fe" type="checkbox"/> Galarian Zapdos V (Full Art) — Silver Lance 082/070 — Full Art Ultra Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_a8718f9d911b8c14"><input data-key="a8718f9d911b8c14" id="cb_a8718f9d911b8c14" type="checkbox"/> Galarian Zapdos V (Rainbow) — Chilling Reign 174/198 — Rainbow Secret Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_6c32bd1528dc7672"><input data-key="6c32bd1528dc7672" id="cb_6c32bd1528dc7672" type="checkbox"/> Galarian Zapdos V (Rainbow) — Silver Lance 086/070 — Rainbow Secret Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_8b5a94108ec1c925"><input data-key="8b5a94108ec1c925" id="cb_8b5a94108ec1c925" type="checkbox"/> Galarian Zapdos (SWSH Promo 124) — SWSH Promo SWSH124 — Promo Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_bdd8dcc93327cab8"><input data-key="bdd8dcc93327cab8" id="cb_bdd8dcc93327cab8" type="checkbox"/> Galarian Zapdos ex (SWSH Promo 283) — SWSH Promo SWSH283 — Promo ex — EN</label></li>
+<li data-lang="EN"><label for="cb_459b903d97d70632"><input data-key="459b903d97d70632" id="cb_459b903d97d70632" type="checkbox"/> Zapdos (Evolving Skies) — Evolving Skies 82/203 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_607240376106935e"><input data-key="607240376106935e" id="cb_607240376106935e" type="checkbox"/> Zapdos (Evolving Skies – Reverse) — Evolving Skies 82/203 — Reverse‑Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_f981e592255c572a"><input data-key="f981e592255c572a" id="cb_f981e592255c572a" type="checkbox"/> Zapdos (Eevee Heroes) — Eevee Heroes 036/069 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_c076a3b190d2fb1b"><input data-key="c076a3b190d2fb1b" id="cb_c076a3b190d2fb1b" type="checkbox"/> Rocket’s Zapdos (Celebrations Classic) — Celebrations 15/132 — Classic Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_6af4171d63ffd415"><input data-key="6af4171d63ffd415" id="cb_6af4171d63ffd415" type="checkbox"/> Zapdos (Brilliant Stars – Gold) — Brilliant Stars 182/172 — Secret Gold Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_debbbeb96fd08c01"><input data-key="debbbeb96fd08c01" id="cb_debbbeb96fd08c01" type="checkbox"/> Zapdos (Japanese VSTAR Universe – Gold) — VSTAR Universe 208/172 — Secret Gold Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_68bd6150bc761530"><input data-key="68bd6150bc761530" id="cb_68bd6150bc761530" type="checkbox"/> Zapdos (Astral Radiance TG19) — Astral Radiance TG19/TG30 — Trainer Gallery Full Art — EN</label></li>
+<li data-lang="JP"><label for="cb_c62bd7c6bf07b7d4"><input data-key="c62bd7c6bf07b7d4" id="cb_c62bd7c6bf07b7d4" type="checkbox"/> Zapdos (Battle Region TG08) — Battle Region TG08/TG09 — Character Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_336da535f41630f3"><input data-key="336da535f41630f3" id="cb_336da535f41630f3" type="checkbox"/> Zapdos (Pokémon GO) — Pokémon GO 29/78 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_d205100b2279fccd"><input data-key="d205100b2279fccd" id="cb_d205100b2279fccd" type="checkbox"/> Zapdos (Pokémon GO) — Pokémon GO 018/071 — Holo (Rare) — JP</label></li>
+<li data-lang="JP"><label for="cb_7174211ef65f90b4"><input data-key="7174211ef65f90b4" id="cb_7174211ef65f90b4" type="checkbox"/> Zapdos (Scarlet &amp; Violet Promo 49) — SV Promo 049 — Promo ex — JP</label></li>
+<li data-lang="EN"><label for="cb_9e63dc0757e2cc54"><input data-key="9e63dc0757e2cc54" id="cb_9e63dc0757e2cc54" type="checkbox"/> Zapdos (151 – Holo) — 151 145/165 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_0cfc372e9578f100"><input data-key="0cfc372e9578f100" id="cb_0cfc372e9578f100" type="checkbox"/> Zapdos (151 – Holo) — SV2a 145/165 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_5e12d39ff9ed590a"><input data-key="5e12d39ff9ed590a" id="cb_5e12d39ff9ed590a" type="checkbox"/> Zapdos (151 – Full Art) — 151 192/165 — Full Art — EN</label></li>
+<li data-lang="JP"><label for="cb_698d99558769764c"><input data-key="698d99558769764c" id="cb_698d99558769764c" type="checkbox"/> Zapdos (151 – Full Art) — SV2a 192/165 — Full Art — JP</label></li>
+<li data-lang="EN"><label for="cb_6f9a32bf4ee68576"><input data-key="6f9a32bf4ee68576" id="cb_6f9a32bf4ee68576" type="checkbox"/> Zapdos (151 – Special Illustration) — 151 202/165 — Special Illustration Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_ff90adca2e9dfeee"><input data-key="ff90adca2e9dfeee" id="cb_ff90adca2e9dfeee" type="checkbox"/> Zapdos (151 – Special Illustration) — SV2a 202/165 — Special Illustration Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_c1dda34feebea6f4"><input data-key="c1dda34feebea6f4" id="cb_c1dda34feebea6f4" type="checkbox"/> Zapdos (Twilight Masquerade) — Twilight Masquerade 65/167 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_77f1e9c546c17897"><input data-key="77f1e9c546c17897" id="cb_77f1e9c546c17897" type="checkbox"/> Zapdos (JP Twilight Masquerade) — Mask of Change 065/102 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_eabe6429938dfaf1"><input data-key="eabe6429938dfaf1" id="cb_eabe6429938dfaf1" type="checkbox"/> Team Rocket’s Zapdos (Destined Rivals) — Destined Rivals 70/182 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_943cc8494a256ca2"><input data-key="943cc8494a256ca2" id="cb_943cc8494a256ca2" type="checkbox"/> Rocket’s Zapdos (Shrouded Fable) — Shrouded Fable 070/092 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_2b5c0aece4aa0a07"><input data-key="2b5c0aece4aa0a07" id="cb_2b5c0aece4aa0a07" type="checkbox"/> Zapdos ex (SV Promo 49) — Scarlet &amp; Violet Promo 049 — Promo ex — EN</label></li>
+<li data-lang="EN"><label for="cb_bb4373ac2c6077a7"><input data-key="bb4373ac2c6077a7" id="cb_bb4373ac2c6077a7" type="checkbox"/> Zapdos ex (Stellar Crown) — Stellar Crown 143/146 — Holo ex — EN</label></li>
+<li data-lang="JP"><label for="cb_6b10e3ee193f8df8"><input data-key="6b10e3ee193f8df8" id="cb_6b10e3ee193f8df8" type="checkbox"/> Zapdos ex (SV4K) — Ancient Roar 075/066 — Holo ex — JP</label></li>
+<li data-lang="EN"><label for="cb_11298265a1b0ebac"><input data-key="11298265a1b0ebac" id="cb_11298265a1b0ebac" type="checkbox"/> Zapdos (TCG Pocket) — Genetic Apex 103/226 — Prism ◊ (Non‑Holo) — EN</label></li>
+<li data-lang="JP"><label for="cb_0a68c6ba0bfa9501"><input data-key="0a68c6ba0bfa9501" id="cb_0a68c6ba0bfa9501" type="checkbox"/> Zapdos (TCG Pocket) — Sparkling Squall 101/219 — Prism ◊ (Non‑Holo) — JP</label></li>
+<li data-lang="JP"><label for="cb_4496e2627288fd7a"><input data-key="4496e2627288fd7a" id="cb_4496e2627288fd7a" type="checkbox"/> Zapdos (Red Deck) — Red Deck – no.# — Non‑Holo (Rare) — JP</label></li>
+<li data-lang="JP"><label for="cb_b39d671ade232981"><input data-key="b39d671ade232981" id="cb_b39d671ade232981" type="checkbox"/> Zapdos (Pokémon Web) — Pokémon Web 046/048 — Holo (Rare) — JP</label></li>
+<li data-lang="JP"><label for="cb_667d48e2dcdad67b"><input data-key="667d48e2dcdad67b" id="cb_667d48e2dcdad67b" type="checkbox"/> Zapdos (Green Deck) — Green Deck – no.# — Non‑Holo (Rare) — JP</label></li>
+<li data-lang="JP"><label for="cb_bab4e7d64c3eb8f3"><input data-key="bab4e7d64c3eb8f3" id="cb_bab4e7d64c3eb8f3" type="checkbox"/> Zapdos (T Promo 015/T) — T Promotional 015/T — Promo Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_cbde6ba819a342a1"><input data-key="cbde6ba819a342a1" id="cb_cbde6ba819a342a1" type="checkbox"/> Zapdos (Promotional Card P10/P18) — TCG GB Promotional Card P10/P18 — Promo (Non‑legal) — EN/JP</label></li>
+<li data-lang="MIX"><label for="cb_93e3dd9509c0fa71"><input data-key="93e3dd9509c0fa71" id="cb_93e3dd9509c0fa71" type="checkbox"/> Total cards —  —  —  — **110 entries**</label></li>
+</ul></section>
+<section><h2>Articuno cards</h2><ul>
+<li data-lang="EN"><label for="cb_17916d9c69cfae56"><input data-key="17916d9c69cfae56" id="cb_17916d9c69cfae56" type="checkbox"/> Articuno (Fossil – Holo) — Fossil 2/62 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_da430f818a6c5786"><input data-key="da430f818a6c5786" id="cb_da430f818a6c5786" type="checkbox"/> Articuno (Fossil – Holo) — Mystery of the Fossils – no.# — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_e053a41058215491"><input data-key="e053a41058215491" id="cb_e053a41058215491" type="checkbox"/> Articuno (Fossil – Non‑Holo) — Fossil 17/62 — Non‑Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_f154c86a29da61d2"><input data-key="f154c86a29da61d2" id="cb_f154c86a29da61d2" type="checkbox"/> Articuno (Fossil – Non‑Holo) — Mystery of the Fossils – no.# — Non‑Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_907e883bf8c82d2b"><input data-key="907e883bf8c82d2b" id="cb_907e883bf8c82d2b" type="checkbox"/> Articuno (Legendary Collection) — Legendary Collection 2/110 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_c8ad620f138791a2"><input data-key="c8ad620f138791a2" id="cb_c8ad620f138791a2" type="checkbox"/> Articuno (Legendary Collection – Reverse) — Legendary Collection 2/110 — Reverse‑Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_35dc36d45494862d"><input data-key="35dc36d45494862d" id="cb_35dc36d45494862d" type="checkbox"/> Articuno (Skyridge – Crystal) — Skyridge H3/H32 — Crystal‑type Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_9cb195b04b9e93fc"><input data-key="9cb195b04b9e93fc" id="cb_9cb195b04b9e93fc" type="checkbox"/> Articuno (Skyridge – Crystal) — Mysterious Mountains 047/071 — Crystal‑type Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_847a586db6a57f4a"><input data-key="847a586db6a57f4a" id="cb_847a586db6a57f4a" type="checkbox"/> Articuno (Skyridge – Reverse) — Skyridge 27/144 — Reverse‑Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_f71b2339c7fb8e46"><input data-key="f71b2339c7fb8e46" id="cb_f71b2339c7fb8e46" type="checkbox"/> Articuno (P Promos) — P Promos 23/47 — Promo Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_9cbb2319ad9a05fd"><input data-key="9cbb2319ad9a05fd" id="cb_9cbb2319ad9a05fd" type="checkbox"/> Articuno ex (EX FireRed &amp; LeafGreen) — EX FireRed &amp; LeafGreen 114/112 — Ultra Rare ex — EN</label></li>
+<li data-lang="JP"><label for="cb_edc0561fcf8f2b20"><input data-key="edc0561fcf8f2b20" id="cb_edc0561fcf8f2b20" type="checkbox"/> Articuno ex (Japanese) — Flight of Legends 036/053 — Ultra Rare ex — JP</label></li>
+<li data-lang="EN"><label for="cb_be16fbc31b700e0c"><input data-key="be16fbc31b700e0c" id="cb_be16fbc31b700e0c" type="checkbox"/> Rocket’s Articuno ex — EX Team Rocket Returns 104/109 — Ultra Rare ex — EN</label></li>
+<li data-lang="JP"><label for="cb_8933123d984f9ac7"><input data-key="8933123d984f9ac7" id="cb_8933123d984f9ac7" type="checkbox"/> Rocket’s Articuno ex (Japanese) — Rocket Gang Returns 086/084 — Ultra Rare ex — JP</label></li>
+<li data-lang="EN"><label for="cb_8e296efa4d1c437b"><input data-key="8e296efa4d1c437b" id="cb_8e296efa4d1c437b" type="checkbox"/> Articuno ex (Nintendo Promo) — Nintendo Promo 031 — Promo ex — EN</label></li>
+<li data-lang="JP"><label for="cb_1d44f2aa053f0f2f"><input data-key="1d44f2aa053f0f2f" id="cb_1d44f2aa053f0f2f" type="checkbox"/> Articuno ex (Nintendo Promo) — PCG‑P Promo 025 — Promo ex — JP</label></li>
+<li data-lang="EN"><label for="cb_bd5a80267e41d552"><input data-key="bd5a80267e41d552" id="cb_bd5a80267e41d552" type="checkbox"/> Articuno (Majestic Dawn – Holo) — Majestic Dawn 1/100 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_233411831d054447"><input data-key="233411831d054447" id="cb_233411831d054447" type="checkbox"/> Articuno (Moonlit Pursuit) — Moonlit Pursuit 001/100 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_f36a08300f846b94"><input data-key="f36a08300f846b94" id="cb_f36a08300f846b94" type="checkbox"/> Articuno (Majestic Dawn – Reverse) — Majestic Dawn 1/100 — Reverse‑Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_820862aa09d5d573"><input data-key="820862aa09d5d573" id="cb_820862aa09d5d573" type="checkbox"/> Articuno (Supreme Victors – Holo) — Supreme Victors 16/147 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_b4cf7b7ff0eda649"><input data-key="b4cf7b7ff0eda649" id="cb_b4cf7b7ff0eda649" type="checkbox"/> Articuno (Beat of the Frontier) — Beat of the Frontier 034/090 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_d1210f3f7c3b350f"><input data-key="d1210f3f7c3b350f" id="cb_d1210f3f7c3b350f" type="checkbox"/> Articuno (Supreme Victors – Reverse) — Supreme Victors 16/147 — Reverse‑Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_d11ceef49a281d7e"><input data-key="d11ceef49a281d7e" id="cb_d11ceef49a281d7e" type="checkbox"/> Articuno (Supreme Victors – Secret) — Supreme Victors 148/147 — Secret Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_60748f9ac8600fdf"><input data-key="60748f9ac8600fdf" id="cb_60748f9ac8600fdf" type="checkbox"/> Articuno (Secret in JP) — Beat of the Frontier 091/090 — Secret Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_7cd222734b58fbcd"><input data-key="7cd222734b58fbcd" id="cb_7cd222734b58fbcd" type="checkbox"/> Articuno (Arceus) — Arceus 1/99 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_4c97417948e440b2"><input data-key="4c97417948e440b2" id="cb_4c97417948e440b2" type="checkbox"/> Articuno (Advent of Arceus) — Advent of Arceus 001/090 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_5bf2ec10719b070f"><input data-key="5bf2ec10719b070f" id="cb_5bf2ec10719b070f" type="checkbox"/> Articuno (Pokémon Rumble) — Pokémon Rumble 6/16 — Promo Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_e7509918c2228eb4"><input data-key="e7509918c2228eb4" id="cb_e7509918c2228eb4" type="checkbox"/> Articuno (Rumble JP) — Rumble JP 006/016 — Promo Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_2493cee7252d6ae6"><input data-key="2493cee7252d6ae6" id="cb_2493cee7252d6ae6" type="checkbox"/> Articuno (Next Destinies) — Next Destinies 27/99 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_f285f01a11416d46"><input data-key="f285f01a11416d46" id="cb_f285f01a11416d46" type="checkbox"/> Articuno (Psychic Shock) — Psycho Shock 016/076 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_ca473194c69acfce"><input data-key="ca473194c69acfce" id="cb_ca473194c69acfce" type="checkbox"/> Articuno (Legendary Treasures) — Legendary Treasures 32/113 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_aa94380a028ab390"><input data-key="aa94380a028ab390" id="cb_aa94380a028ab390" type="checkbox"/> Articuno (Legendary Shine) — Legendary Shine 043/072 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_932e4dd7c6ec1497"><input data-key="932e4dd7c6ec1497" id="cb_932e4dd7c6ec1497" type="checkbox"/> Articuno (Roaring Skies – Holo) — Roaring Skies 16/108 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_8b34a632f470d889"><input data-key="8b34a632f470d889" id="cb_8b34a632f470d889" type="checkbox"/> Articuno (Double Crisis) — Double Crisis 023/034 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_7bd1afe7376d2c19"><input data-key="7bd1afe7376d2c19" id="cb_7bd1afe7376d2c19" type="checkbox"/> Articuno (Roaring Skies – Non‑Holo) — Roaring Skies 17/108 — Non‑Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_ba8068d8f74d58bd"><input data-key="ba8068d8f74d58bd" id="cb_ba8068d8f74d58bd" type="checkbox"/> Articuno (CP6 Non‑Holo) — CP6 059/087 — Non‑Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_5efc2fb12f0269af"><input data-key="5efc2fb12f0269af" id="cb_5efc2fb12f0269af" type="checkbox"/> Articuno (Generations) — Generations 25/83 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_a77f0bf16bca9331"><input data-key="a77f0bf16bca9331" id="cb_a77f0bf16bca9331" type="checkbox"/> Articuno (Break Starter) — BREAK Starter 026/072 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_662b1af55c2a540c"><input data-key="662b1af55c2a540c" id="cb_662b1af55c2a540c" type="checkbox"/> Articuno (Evolutions – Holo) — Evolutions 20/108 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_bf6576ad0ee91228"><input data-key="bf6576ad0ee91228" id="cb_bf6576ad0ee91228" type="checkbox"/> Articuno (Evolutions – Reverse) — Evolutions 20/108 — Reverse‑Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_01d0e99e94e06c21"><input data-key="01d0e99e94e06c21" id="cb_01d0e99e94e06c21" type="checkbox"/> Articuno (20th Anniv.) — Expansion 20th Anniversary 029/087 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_101663a4b54700ee"><input data-key="101663a4b54700ee" id="cb_101663a4b54700ee" type="checkbox"/> Articuno (Team Up) — Team Up 32/181 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_e7502a43c15e1279"><input data-key="e7502a43c15e1279" id="cb_e7502a43c15e1279" type="checkbox"/> Articuno (Tag Bolt) — Tag Bolt 052/095 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_8e1145ae20959e0e"><input data-key="8e1145ae20959e0e" id="cb_8e1145ae20959e0e" type="checkbox"/> Articuno (Team Up – Reverse) — Team Up 32/181 — Reverse‑Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_3538aac74644376d"><input data-key="3538aac74644376d" id="cb_3538aac74644376d" type="checkbox"/> Articuno (Hidden Fates) — Hidden Fates 27/68 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_3c6aa6a5de91fc06"><input data-key="3c6aa6a5de91fc06" id="cb_3c6aa6a5de91fc06" type="checkbox"/> Articuno (Hidden Fates – Reverse) — Hidden Fates 27/68 — Reverse‑Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_2da531a28dd4e748"><input data-key="2da531a28dd4e748" id="cb_2da531a28dd4e748" type="checkbox"/> Articuno (High Class Pack Shiny GX) — High Class Pack Shiny GX 027/094 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_11734947d3be9d88"><input data-key="11734947d3be9d88" id="cb_11734947d3be9d88" type="checkbox"/> Moltres &amp; Articuno &amp; Zapdos GX — Hidden Fates 44/68 — Ultra Rare GX — EN</label></li>
+<li data-lang="JP"><label for="cb_d98769f38c6459cb"><input data-key="d98769f38c6459cb" id="cb_d98769f38c6459cb" type="checkbox"/> Moltres &amp; Articuno &amp; Zapdos GX — High Class Pack Shiny GX 100/094 — Ultra Rare GX — JP</label></li>
+<li data-lang="EN"><label for="cb_df9403503c46be8c"><input data-key="df9403503c46be8c" id="cb_df9403503c46be8c" type="checkbox"/> Moltres &amp; Articuno &amp; Zapdos GX (Full Art) — Hidden Fates 66/68 — Full Art GX — EN</label></li>
+<li data-lang="JP"><label for="cb_75bf370957d9e067"><input data-key="75bf370957d9e067" id="cb_75bf370957d9e067" type="checkbox"/> Moltres &amp; Articuno &amp; Zapdos GX (FA) — High Class Pack Shiny GX 238/173 — Full Art GX — JP</label></li>
+<li data-lang="EN"><label for="cb_df304a6504aabb8a"><input data-key="df304a6504aabb8a" id="cb_df304a6504aabb8a" type="checkbox"/> Moltres &amp; Articuno &amp; Zapdos GX (Rainbow) — Hidden Fates 69/68 — Rainbow Secret Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_9b29b2a29773e30e"><input data-key="9b29b2a29773e30e" id="cb_9b29b2a29773e30e" type="checkbox"/> Moltres &amp; Articuno &amp; Zapdos GX (Rainbow) — High Class Pack Shiny GX 239/173 — Rainbow Secret Rare — JP</label></li>
+<li data-lang="JP"><label for="cb_d2121a4a2002833b"><input data-key="d2121a4a2002833b" id="cb_d2121a4a2002833b" type="checkbox"/> Moltres &amp; Articuno &amp; Zapdos GX (Tag All Stars) — Tag All Stars 226/173 — Special Art Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_1f63d9db55f81a4d"><input data-key="1f63d9db55f81a4d" id="cb_1f63d9db55f81a4d" type="checkbox"/> Articuno (SM Promo SM140) — SM Black Star Promo SM140 — Promo Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_c57ae9f14d2ddf80"><input data-key="c57ae9f14d2ddf80" id="cb_c57ae9f14d2ddf80" type="checkbox"/> Articuno (P Promos BW) — BW Promos 34 — Promo Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_aeef04f6aadc30c2"><input data-key="aeef04f6aadc30c2" id="cb_aeef04f6aadc30c2" type="checkbox"/> Galarian Articuno V (Chilling Reign) — Chilling Reign 063/198 — Ultra Rare V — EN</label></li>
+<li data-lang="JP"><label for="cb_983baa066913f373"><input data-key="983baa066913f373" id="cb_983baa066913f373" type="checkbox"/> Galarian Articuno V — Silver Lance 027/070 — Ultra Rare V — JP</label></li>
+<li data-lang="EN"><label for="cb_4ffea2ee9f1806a3"><input data-key="4ffea2ee9f1806a3" id="cb_4ffea2ee9f1806a3" type="checkbox"/> Galarian Articuno V (Full Art) — Chilling Reign 171/198 — Full Art Ultra Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_60838911a8e269c7"><input data-key="60838911a8e269c7" id="cb_60838911a8e269c7" type="checkbox"/> Galarian Articuno V (Full Art) — Silver Lance 080/070 — Full Art Ultra Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_9b34a788983a05e0"><input data-key="9b34a788983a05e0" id="cb_9b34a788983a05e0" type="checkbox"/> Galarian Articuno V (Rainbow) — Chilling Reign 172/198 — Rainbow Secret Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_160759a7b58717eb"><input data-key="160759a7b58717eb" id="cb_160759a7b58717eb" type="checkbox"/> Galarian Articuno V (Rainbow) — Silver Lance 084/070 — Rainbow Secret Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_0ff592d84ee1cbea"><input data-key="0ff592d84ee1cbea" id="cb_0ff592d84ee1cbea" type="checkbox"/> Galarian Articuno (SWSH Promo 121) — SWSH Promo SWSH121 — Promo Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_f49f80b19214a5df"><input data-key="f49f80b19214a5df" id="cb_f49f80b19214a5df" type="checkbox"/> Galarian Articuno ex (SWSH Promo 281) — SWSH Promo SWSH281 — Promo ex — EN</label></li>
+<li data-lang="EN"><label for="cb_303c58c6d7d9ae1b"><input data-key="303c58c6d7d9ae1b" id="cb_303c58c6d7d9ae1b" type="checkbox"/> Articuno (Evolving Skies) — Evolving Skies 46/203 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_69f6726306f21744"><input data-key="69f6726306f21744" id="cb_69f6726306f21744" type="checkbox"/> Articuno (Evolving Skies – Reverse) — Evolving Skies 46/203 — Reverse‑Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_0e8f86d47b2a3f4b"><input data-key="0e8f86d47b2a3f4b" id="cb_0e8f86d47b2a3f4b" type="checkbox"/> Articuno (Eevee Heroes) — Eevee Heroes 017/069 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_42d0695f8da94967"><input data-key="42d0695f8da94967" id="cb_42d0695f8da94967" type="checkbox"/> Articuno (Celebrations Classic) — Celebrations 2/110 — Classic Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_85696abf47cae5e8"><input data-key="85696abf47cae5e8" id="cb_85696abf47cae5e8" type="checkbox"/> Articuno (Silver Tempest) — Silver Tempest 36/195 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_398f3169ec17e0ee"><input data-key="398f3169ec17e0ee" id="cb_398f3169ec17e0ee" type="checkbox"/> Articuno (Paradigm Trigger) — Paradigm Trigger 033/098 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_708b54881d809df5"><input data-key="708b54881d809df5" id="cb_708b54881d809df5" type="checkbox"/> Articuno (151 – Holo) — 151 144/165 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_294bc3772d82e105"><input data-key="294bc3772d82e105" id="cb_294bc3772d82e105" type="checkbox"/> Articuno (151 – Holo) — SV2a 144/165 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_d51810c947b5f1a0"><input data-key="d51810c947b5f1a0" id="cb_d51810c947b5f1a0" type="checkbox"/> Articuno (151 – Full Art) — 151 191/165 — Full Art — EN</label></li>
+<li data-lang="JP"><label for="cb_7dada8b228a1b324"><input data-key="7dada8b228a1b324" id="cb_7dada8b228a1b324" type="checkbox"/> Articuno (151 – Full Art) — SV2a 191/165 — Full Art — JP</label></li>
+<li data-lang="EN"><label for="cb_7f6f1c2b7fb36d7d"><input data-key="7f6f1c2b7fb36d7d" id="cb_7f6f1c2b7fb36d7d" type="checkbox"/> Articuno (151 – Special Illustration) — 151 201/165 — Special Illustration Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_736c0d93adaf57ef"><input data-key="736c0d93adaf57ef" id="cb_736c0d93adaf57ef" type="checkbox"/> Articuno (151 – Special Illustration) — SV2a 201/165 — Special Illustration Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_a96c22588e2262bc"><input data-key="a96c22588e2262bc" id="cb_a96c22588e2262bc" type="checkbox"/> Articuno (Pokémon GO) — Pokémon GO 24/78 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_36502773b4878648"><input data-key="36502773b4878648" id="cb_36502773b4878648" type="checkbox"/> Articuno (Pokémon GO) — Pokémon GO 014/071 — Holo (Rare) — JP</label></li>
+<li data-lang="JP"><label for="cb_591917ef1d2f355b"><input data-key="591917ef1d2f355b" id="cb_591917ef1d2f355b" type="checkbox"/> Galarian Articuno ex (SV Promo 46) — SV Promo 046 — Promo ex — JP</label></li>
+<li data-lang="EN"><label for="cb_2268e868cb59a64b"><input data-key="2268e868cb59a64b" id="cb_2268e868cb59a64b" type="checkbox"/> Articuno ex (Stellar Crown) — Stellar Crown 141/146 — Holo ex — EN</label></li>
+<li data-lang="JP"><label for="cb_9a2601d0e1155743"><input data-key="9a2601d0e1155743" id="cb_9a2601d0e1155743" type="checkbox"/> Articuno ex (SV4K) — Ancient Roar 073/066 — Holo ex — JP</label></li>
+<li data-lang="EN"><label for="cb_23af1903403718ee"><input data-key="23af1903403718ee" id="cb_23af1903403718ee" type="checkbox"/> Articuno (TCG Pocket) — Genetic Apex 102/226 — Prism ◊ (Non‑Holo) — EN</label></li>
+<li data-lang="JP"><label for="cb_f3f91060b8aa112c"><input data-key="f3f91060b8aa112c" id="cb_f3f91060b8aa112c" type="checkbox"/> Articuno (TCG Pocket) — Sparkling Squall 102/219 — Prism ◊ (Non‑Holo) — JP</label></li>
+<li data-lang="EN"><label for="cb_0742a3ff62f0d6bb"><input data-key="0742a3ff62f0d6bb" id="cb_0742a3ff62f0d6bb" type="checkbox"/> Articuno (Blastoise &amp; Suicune ex Deck) — Blastoise &amp; Suicune ex Deck 009/034 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_e20e4118318424dc"><input data-key="e20e4118318424dc" id="cb_e20e4118318424dc" type="checkbox"/> Articuno (Blastoise &amp; Suicune ex Deck) — Blastoise &amp; Suicune ex Deck 009/032 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_e91340d58184fe78"><input data-key="e91340d58184fe78" id="cb_e91340d58184fe78" type="checkbox"/> Articuno (Promo Card P03) — Promotional Card P03 — Promo Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_2270a2fd5e76ed0b"><input data-key="2270a2fd5e76ed0b" id="cb_2270a2fd5e76ed0b" type="checkbox"/> Articuno (Promo Card P03) — Promotional Card P03 — Promo Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_63b4b2f131b844be"><input data-key="63b4b2f131b844be" id="cb_63b4b2f131b844be" type="checkbox"/> Articuno (Promo Card P08) — Promotional Card P08 — Promo Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_ae94f334d9856a9a"><input data-key="ae94f334d9856a9a" id="cb_ae94f334d9856a9a" type="checkbox"/> Articuno (Promo Card P08) — Promotional Card P08 — Promo Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_900e564d6a5ce69b"><input data-key="900e564d6a5ce69b" id="cb_900e564d6a5ce69b" type="checkbox"/> Articuno (Red Deck) — Red Deck – no.# — Non‑Holo (Rare) — JP</label></li>
+<li data-lang="JP"><label for="cb_6d12dad15deed04e"><input data-key="6d12dad15deed04e" id="cb_6d12dad15deed04e" type="checkbox"/> Articuno (Pokémon Web) — Pokémon Web 045/048 — Holo (Rare) — JP</label></li>
+<li data-lang="JP"><label for="cb_1b30c5c2e1cd1b39"><input data-key="1b30c5c2e1cd1b39" id="cb_1b30c5c2e1cd1b39" type="checkbox"/> Articuno (T Promo 014/T) — T Promotional 014/T — Promo Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_5b972ce90d5569d2"><input data-key="5b972ce90d5569d2" id="cb_5b972ce90d5569d2" type="checkbox"/> Articuno (Skyridge – Non‑Holo) — Skyridge 4/144 — Non‑Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_bf605c62bef62fba"><input data-key="bf605c62bef62fba" id="cb_bf605c62bef62fba" type="checkbox"/> Articuno (Mysterious Mountains – Non‑Holo) — Mysterious Mountains 030/088 — Non‑Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_62c1a111b2aa1b8b"><input data-key="62c1a111b2aa1b8b" id="cb_62c1a111b2aa1b8b" type="checkbox"/> Articuno GX (Celestial Storm RR) — Celestial Storm 31/168 — Ultra Rare GX (RR) — EN</label></li>
+<li data-lang="JP"><label for="cb_03dd1c50fd2bee63"><input data-key="03dd1c50fd2bee63" id="cb_03dd1c50fd2bee63" type="checkbox"/> Articuno GX (Champion Road RR) — Champion Road 014/066 — Ultra Rare GX (RR) — JP</label></li>
+<li data-lang="EN"><label for="cb_d70de4485c24525d"><input data-key="d70de4485c24525d" id="cb_d70de4485c24525d" type="checkbox"/> Articuno GX (Celestial Storm FA) — Celestial Storm 154/168 — Full Art GX — EN</label></li>
+<li data-lang="JP"><label for="cb_b78f5e803dd3edfc"><input data-key="b78f5e803dd3edfc" id="cb_b78f5e803dd3edfc" type="checkbox"/> Articuno GX (Champion Road FA) — Champion Road 067/066 — Full Art GX — JP</label></li>
+<li data-lang="EN"><label for="cb_b2c58070462d6283"><input data-key="b2c58070462d6283" id="cb_b2c58070462d6283" type="checkbox"/> Articuno GX (Celestial Storm Rainbow) — Celestial Storm 171/168 — Rainbow Secret Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_d942ab57f9f599cf"><input data-key="d942ab57f9f599cf" id="cb_d942ab57f9f599cf" type="checkbox"/> Articuno GX (Champion Road Rainbow) — Champion Road 078/066 — Rainbow Secret Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_b8af81a71cdc355c"><input data-key="b8af81a71cdc355c" id="cb_b8af81a71cdc355c" type="checkbox"/> Articuno GX (Hidden Fates Shiny) — Hidden Fates SV54/SV94 — Shiny Full Art GX — EN</label></li>
+<li data-lang="JP"><label for="cb_18e17444e3135e1c"><input data-key="18e17444e3135e1c" id="cb_18e17444e3135e1c" type="checkbox"/> Articuno GX (GX Ultra Shiny) — GX Ultra Shiny 214/150 — Shiny Full Art GX — JP</label></li>
+<li data-lang="EN"><label for="cb_9df852f3d33c5788"><input data-key="9df852f3d33c5788" id="cb_9df852f3d33c5788" type="checkbox"/> Articuno (Brilliant Stars – Gold) — Brilliant Stars 181/172 — Secret Gold Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_7236b5cd3c9b6c55"><input data-key="7236b5cd3c9b6c55" id="cb_7236b5cd3c9b6c55" type="checkbox"/> Articuno (Start Deck 100 Gold) — Start Deck 100 169/414 — Secret Gold Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_014e1ad1940b7aba"><input data-key="014e1ad1940b7aba" id="cb_014e1ad1940b7aba" type="checkbox"/> Articuno (Astral Radiance TG16) — Astral Radiance TG16/TG30 — Trainer Gallery Full Art — EN</label></li>
+<li data-lang="JP"><label for="cb_17e921f1223e39dc"><input data-key="17e921f1223e39dc" id="cb_17e921f1223e39dc" type="checkbox"/> Articuno (VMAX Climax CHR) — VMAX Climax 060/184 — Character Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_49528f932bc6d982"><input data-key="49528f932bc6d982" id="cb_49528f932bc6d982" type="checkbox"/> Articuno (Journey Together) — Journey Together 032/159 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_7bba34b99a007fae"><input data-key="7bba34b99a007fae" id="cb_7bba34b99a007fae" type="checkbox"/> Articuno (Partners) — Partners 018/100 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_77f7598f68b4a445"><input data-key="77f7598f68b4a445" id="cb_77f7598f68b4a445" type="checkbox"/> Articuno (Journey Together Special) — Journey Together 161/159 — Special Illustration Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_c7262533987629cb"><input data-key="c7262533987629cb" id="cb_c7262533987629cb" type="checkbox"/> Articuno (Partners Special) — Partners 102/100 — Special Illustration Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_048cdbfb4c7e2954"><input data-key="048cdbfb4c7e2954" id="cb_048cdbfb4c7e2954" type="checkbox"/> Team Rocket’s Articuno (Destined Rivals) — Destined Rivals 51/182 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_7e96436d9faea831"><input data-key="7e96436d9faea831" id="cb_7e96436d9faea831" type="checkbox"/> Team Rocket’s Articuno (Glory of the Rocket Gang) — Glory of the Rocket Gang 022/098 — Holo (Rare) — JP</label></li>
+<li data-lang="JP"><label for="cb_8ff786f280ae3bcc"><input data-key="8ff786f280ae3bcc" id="cb_8ff786f280ae3bcc" type="checkbox"/> Articuno (Extra Regulation Box) — Extra Regulation Box 006/048 — Non‑Holo — JP</label></li>
+<li data-lang="MIX"><label for="cb_dd0b0d12379a15f8"><input data-key="dd0b0d12379a15f8" id="cb_dd0b0d12379a15f8" type="checkbox"/> Total cards —  —  —  — **114 entries**</label></li>
+</ul></section>
+<section><h2>Moltres cards</h2><ul>
+<li data-lang="EN"><label for="cb_6860a510363b6b74"><input data-key="6860a510363b6b74" id="cb_6860a510363b6b74" type="checkbox"/> Moltres (Fossil – Holo) — Fossil 3/62 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_144100c70217d4a0"><input data-key="144100c70217d4a0" id="cb_144100c70217d4a0" type="checkbox"/> Moltres (Fossil – Holo) — Mystery of the Fossils – no.# — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_a519a427359862a5"><input data-key="a519a427359862a5" id="cb_a519a427359862a5" type="checkbox"/> Moltres (Fossil – Non‑Holo) — Fossil 21/62 — Non‑Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_1aca704b8d4fe6cd"><input data-key="1aca704b8d4fe6cd" id="cb_1aca704b8d4fe6cd" type="checkbox"/> Moltres (Fossil – Non‑Holo) — Mystery of the Fossils – no.# — Non‑Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_adfddf3102006165"><input data-key="adfddf3102006165" id="cb_adfddf3102006165" type="checkbox"/> Moltres (Legendary Collection) — Legendary Collection 4/110 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_6386bd49d9db59c7"><input data-key="6386bd49d9db59c7" id="cb_6386bd49d9db59c7" type="checkbox"/> Moltres (Legendary Collection – Reverse) — Legendary Collection 30/110 — Reverse‑Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_6e4a992fd653b69b"><input data-key="6e4a992fd653b69b" id="cb_6e4a992fd653b69b" type="checkbox"/> Blaine’s Moltres (Gym Heroes) — Gym Heroes 27/132 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_6a14558afd037dbb"><input data-key="6a14558afd037dbb" id="cb_6a14558afd037dbb" type="checkbox"/> Blaine’s Moltres (Japanese) — Leaders’ Stadium – no.# — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_3719e511ae8105e4"><input data-key="3719e511ae8105e4" id="cb_3719e511ae8105e4" type="checkbox"/> Blaine’s Moltres (Gym Challenge) — Gym Challenge 31/132 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_0a4a630548d41171"><input data-key="0a4a630548d41171" id="cb_0a4a630548d41171" type="checkbox"/> Blaine’s Moltres (Japanese) — Challenge from the Darkness – no.# — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_0cf2c3a58a0f1a41"><input data-key="0cf2c3a58a0f1a41" id="cb_0cf2c3a58a0f1a41" type="checkbox"/> Rocket’s Moltres (Gym Challenge) — Gym Challenge 12/132 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_6a99e64671b4f496"><input data-key="6a99e64671b4f496" id="cb_6a99e64671b4f496" type="checkbox"/> Rocket’s Moltres (Japanese) — Challenge from the Darkness – no.# — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_9e626dc58948f417"><input data-key="9e626dc58948f417" id="cb_9e626dc58948f417" type="checkbox"/> Moltres (Black Star Promo #21) — Wizards Promo 21 — Promo Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_4438a7537acf7aef"><input data-key="4438a7537acf7aef" id="cb_4438a7537acf7aef" type="checkbox"/> Moltres (Unnumbered Promo) — Unnumbered Promo – no.# — Promo Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_7c733950e92f4832"><input data-key="7c733950e92f4832" id="cb_7c733950e92f4832" type="checkbox"/> Moltres (Vending Machine) — Expansion Sheet 2 – no.# — Non‑Holo (Uncommon) — JP</label></li>
+<li data-lang="EN"><label for="cb_8c9cfbdfe4c86ebc"><input data-key="8c9cfbdfe4c86ebc" id="cb_8c9cfbdfe4c86ebc" type="checkbox"/> Moltres (Aquapolis Crystal) — Aquapolis H31/H32 — Crystal‑type Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_c4a540177a3fdf32"><input data-key="c4a540177a3fdf32" id="cb_c4a540177a3fdf32" type="checkbox"/> Moltres (Aquapolis) — The Town on No Map 039/087 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_faa1ab1232cd9a59"><input data-key="faa1ab1232cd9a59" id="cb_faa1ab1232cd9a59" type="checkbox"/> Moltres (Aquapolis – Reverse) — Aquapolis 43/147 — Reverse‑Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_b9cd7f76855fb4f8"><input data-key="b9cd7f76855fb4f8" id="cb_b9cd7f76855fb4f8" type="checkbox"/> Moltres (P Promos) — P Promos 25/47 — Promo Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_27ce81ba35f1557c"><input data-key="27ce81ba35f1557c" id="cb_27ce81ba35f1557c" type="checkbox"/> Moltres ex (EX FireRed &amp; LeafGreen) — EX FireRed &amp; LeafGreen 115/112 — Ultra Rare ex — EN</label></li>
+<li data-lang="JP"><label for="cb_931f0f7efaf482fb"><input data-key="931f0f7efaf482fb" id="cb_931f0f7efaf482fb" type="checkbox"/> Moltres ex (Japanese) — Flight of Legends 038/053 — Ultra Rare ex — JP</label></li>
+<li data-lang="EN"><label for="cb_9067860d0f48ca72"><input data-key="9067860d0f48ca72" id="cb_9067860d0f48ca72" type="checkbox"/> Rocket’s Moltres ex — EX Team Rocket Returns 105/109 — Ultra Rare ex — EN</label></li>
+<li data-lang="JP"><label for="cb_5d3b9d11a388115d"><input data-key="5d3b9d11a388115d" id="cb_5d3b9d11a388115d" type="checkbox"/> Rocket’s Moltres ex (Japanese) — Rocket Gang Returns 087/084 — Ultra Rare ex — JP</label></li>
+<li data-lang="EN"><label for="cb_0876c63c5bc9d51f"><input data-key="0876c63c5bc9d51f" id="cb_0876c63c5bc9d51f" type="checkbox"/> Moltres ex (Nintendo Promo) — Nintendo Promo 032 — Promo ex — EN</label></li>
+<li data-lang="JP"><label for="cb_ccd3b43facceee0a"><input data-key="ccd3b43facceee0a" id="cb_ccd3b43facceee0a" type="checkbox"/> Moltres ex (Nintendo Promo) — PCG‑P Promo 026 — Promo ex — JP</label></li>
+<li data-lang="EN"><label for="cb_63ae684af835feb5"><input data-key="63ae684af835feb5" id="cb_63ae684af835feb5" type="checkbox"/> Moltres (Majestic Dawn – Holo) — Majestic Dawn 5/100 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_3717d25115522932"><input data-key="3717d25115522932" id="cb_3717d25115522932" type="checkbox"/> Moltres (Moonlit Pursuit) — Moonlit Pursuit 005/100 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_81a711ce335224f1"><input data-key="81a711ce335224f1" id="cb_81a711ce335224f1" type="checkbox"/> Moltres (Majestic Dawn – Reverse) — Majestic Dawn 5/100 — Reverse‑Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_07f7fc2f9012dec4"><input data-key="07f7fc2f9012dec4" id="cb_07f7fc2f9012dec4" type="checkbox"/> Moltres (Supreme Victors – Holo) — Supreme Victors 18/147 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_d4a15f3b30f79d3c"><input data-key="d4a15f3b30f79d3c" id="cb_d4a15f3b30f79d3c" type="checkbox"/> Moltres (Beat of the Frontier) — Beat of the Frontier 036/090 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_a8d2d694b05bc8ce"><input data-key="a8d2d694b05bc8ce" id="cb_a8d2d694b05bc8ce" type="checkbox"/> Moltres (Supreme Victors – Reverse) — Supreme Victors 18/147 — Reverse‑Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_b771b69b8759198a"><input data-key="b771b69b8759198a" id="cb_b771b69b8759198a" type="checkbox"/> Moltres (Supreme Victors – Secret) — Supreme Victors 149/147 — Secret Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_3e70e1256f81975a"><input data-key="3e70e1256f81975a" id="cb_3e70e1256f81975a" type="checkbox"/> Moltres (Secret in JP) — Beat of the Frontier 093/090 — Secret Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_5dace0efd9695fe2"><input data-key="5dace0efd9695fe2" id="cb_5dace0efd9695fe2" type="checkbox"/> Moltres (Arceus) — Arceus 13/99 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_9f2cc2f1e67d0f32"><input data-key="9f2cc2f1e67d0f32" id="cb_9f2cc2f1e67d0f32" type="checkbox"/> Moltres (Advent of Arceus) — Advent of Arceus 013/090 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_f679cbcfae55afa6"><input data-key="f679cbcfae55afa6" id="cb_f679cbcfae55afa6" type="checkbox"/> Moltres (Pokémon Rumble) — Pokémon Rumble 7/16 — Promo Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_67825f34129fd633"><input data-key="67825f34129fd633" id="cb_67825f34129fd633" type="checkbox"/> Moltres (Rumble JP) — Rumble JP 007/016 — Promo Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_9eddc2656fc7e071"><input data-key="9eddc2656fc7e071" id="cb_9eddc2656fc7e071" type="checkbox"/> Moltres (Next Destinies) — Next Destinies 14/99 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_df46a387d74cac60"><input data-key="df46a387d74cac60" id="cb_df46a387d74cac60" type="checkbox"/> Moltres (Psycho Shock) — Psycho Shock 018/076 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_519865cac76b7498"><input data-key="519865cac76b7498" id="cb_519865cac76b7498" type="checkbox"/> Moltres (Legendary Treasures) — Legendary Treasures 22/113 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_da800f448fac1ccb"><input data-key="da800f448fac1ccb" id="cb_da800f448fac1ccb" type="checkbox"/> Moltres (Legendary Shine) — Legendary Shine 045/072 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_d7ae9c0d5a941bc2"><input data-key="d7ae9c0d5a941bc2" id="cb_d7ae9c0d5a941bc2" type="checkbox"/> Moltres (Roaring Skies – Holo) — Roaring Skies 14/108 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_0916af76e6944103"><input data-key="0916af76e6944103" id="cb_0916af76e6944103" type="checkbox"/> Moltres (Double Crisis) — Double Crisis 021/034 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_62b5a90efb1fc04e"><input data-key="62b5a90efb1fc04e" id="cb_62b5a90efb1fc04e" type="checkbox"/> Moltres (Roaring Skies – Non‑Holo) — Roaring Skies 15/108 — Non‑Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_3f5eeeeacd511d82"><input data-key="3f5eeeeacd511d82" id="cb_3f5eeeeacd511d82" type="checkbox"/> Moltres (CP6 Non‑Holo) — CP6 060/087 — Non‑Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_1d0147ece5090b65"><input data-key="1d0147ece5090b65" id="cb_1d0147ece5090b65" type="checkbox"/> Moltres (Generations) — Generations 18/83 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_4a9aeffea1a480f9"><input data-key="4a9aeffea1a480f9" id="cb_4a9aeffea1a480f9" type="checkbox"/> Moltres (Break Starter) — BREAK Starter 024/072 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_cdf1186741981037"><input data-key="cdf1186741981037" id="cb_cdf1186741981037" type="checkbox"/> Moltres (Evolutions – Holo) — Evolutions 28/108 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_727ad55af5e0e23a"><input data-key="727ad55af5e0e23a" id="cb_727ad55af5e0e23a" type="checkbox"/> Moltres (Evolutions – Reverse) — Evolutions 28/108 — Reverse‑Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_c32cd098574c72fb"><input data-key="c32cd098574c72fb" id="cb_c32cd098574c72fb" type="checkbox"/> Moltres (20th Anniv.) — Expansion 20th Anniversary 031/087 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_23aec5d0039dca37"><input data-key="23aec5d0039dca37" id="cb_23aec5d0039dca37" type="checkbox"/> Moltres (Team Up) — Team Up 19/181 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_c0c8c6b36f7981e8"><input data-key="c0c8c6b36f7981e8" id="cb_c0c8c6b36f7981e8" type="checkbox"/> Moltres (Team Up – Reverse) — Team Up 19/181 — Reverse‑Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_fa5d301d6c59a26c"><input data-key="fa5d301d6c59a26c" id="cb_fa5d301d6c59a26c" type="checkbox"/> Moltres (Tag Bolt) — Tag Bolt 053/095 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_1c870424b188de60"><input data-key="1c870424b188de60" id="cb_1c870424b188de60" type="checkbox"/> Moltres (Hidden Fates) — Hidden Fates 19/68 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_642b0ccca4e56a87"><input data-key="642b0ccca4e56a87" id="cb_642b0ccca4e56a87" type="checkbox"/> Moltres (Hidden Fates – Reverse) — Hidden Fates 19/68 — Reverse‑Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_63fdb326c2c1927a"><input data-key="63fdb326c2c1927a" id="cb_63fdb326c2c1927a" type="checkbox"/> Moltres (High Class Pack Shiny GX) — High Class Pack Shiny GX 019/094 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_2813fc04081ee938"><input data-key="2813fc04081ee938" id="cb_2813fc04081ee938" type="checkbox"/> Moltres &amp; Zapdos &amp; Articuno GX — Hidden Fates 44/68 — Ultra Rare GX — EN</label></li>
+<li data-lang="JP"><label for="cb_11124ff1f1ebf491"><input data-key="11124ff1f1ebf491" id="cb_11124ff1f1ebf491" type="checkbox"/> Moltres &amp; Zapdos &amp; Articuno GX — High Class Pack Shiny GX 100/094 — Ultra Rare GX — JP</label></li>
+<li data-lang="EN"><label for="cb_905e0bab4a8ec330"><input data-key="905e0bab4a8ec330" id="cb_905e0bab4a8ec330" type="checkbox"/> Moltres &amp; Zapdos &amp; Articuno GX (Full Art) — Hidden Fates 66/68 — Full Art GX — EN</label></li>
+<li data-lang="JP"><label for="cb_50cce8c71552a83b"><input data-key="50cce8c71552a83b" id="cb_50cce8c71552a83b" type="checkbox"/> Moltres &amp; Zapdos &amp; Articuno GX (FA) — High Class Pack Shiny GX 238/173 — Full Art GX — JP</label></li>
+<li data-lang="EN"><label for="cb_bf6e289128f4511d"><input data-key="bf6e289128f4511d" id="cb_bf6e289128f4511d" type="checkbox"/> Moltres &amp; Zapdos &amp; Articuno GX (Rainbow) — Hidden Fates 69/68 — Rainbow Secret Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_ceed47bf6e4c2fd6"><input data-key="ceed47bf6e4c2fd6" id="cb_ceed47bf6e4c2fd6" type="checkbox"/> Moltres &amp; Zapdos &amp; Articuno GX (Rainbow) — High Class Pack Shiny GX 239/173 — Rainbow Secret Rare — JP</label></li>
+<li data-lang="JP"><label for="cb_9a8f5ffb404543ed"><input data-key="9a8f5ffb404543ed" id="cb_9a8f5ffb404543ed" type="checkbox"/> Moltres &amp; Zapdos &amp; Articuno GX (Tag All Stars) — Tag All Stars 226/173 — Special Art Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_8f2d89ba60f3c138"><input data-key="8f2d89ba60f3c138" id="cb_8f2d89ba60f3c138" type="checkbox"/> Moltres (SM Promo SM142) — SM Black Star Promo SM142 — Promo Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_1d446444d12fb2d6"><input data-key="1d446444d12fb2d6" id="cb_1d446444d12fb2d6" type="checkbox"/> Moltres (P Promos BW) — BW Promos 33 — Promo Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_8719fcca5b368005"><input data-key="8719fcca5b368005" id="cb_8719fcca5b368005" type="checkbox"/> Galarian Moltres V (Chilling Reign) — Chilling Reign 097/198 — Ultra Rare V — EN</label></li>
+<li data-lang="JP"><label for="cb_e0bc615c1e97ae21"><input data-key="e0bc615c1e97ae21" id="cb_e0bc615c1e97ae21" type="checkbox"/> Galarian Moltres V — Jet‑Black Spirit 045/070 — Ultra Rare V — JP</label></li>
+<li data-lang="EN"><label for="cb_c8a836750d60b0df"><input data-key="c8a836750d60b0df" id="cb_c8a836750d60b0df" type="checkbox"/> Galarian Moltres V (Full Art) — Chilling Reign 176/198 — Full Art Ultra Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_7ef0f33f2d1cc018"><input data-key="7ef0f33f2d1cc018" id="cb_7ef0f33f2d1cc018" type="checkbox"/> Galarian Moltres V (Full Art) — Jet‑Black Spirit 087/070 — Full Art Ultra Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_a5846f0bd0acb403"><input data-key="a5846f0bd0acb403" id="cb_a5846f0bd0acb403" type="checkbox"/> Galarian Moltres V (Alternate Art) — Chilling Reign 177/198 — Alternate Art Secret Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_76d56c9b8a34160e"><input data-key="76d56c9b8a34160e" id="cb_76d56c9b8a34160e" type="checkbox"/> Galarian Moltres V (Alternate Art) — Jet‑Black Spirit 083/070 — Alternate Art Secret Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_8b9eb04dee1f4885"><input data-key="8b9eb04dee1f4885" id="cb_8b9eb04dee1f4885" type="checkbox"/> Galarian Moltres V (Rainbow) — Chilling Reign 178/198 — Rainbow Secret Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_91565a59614ffe0d"><input data-key="91565a59614ffe0d" id="cb_91565a59614ffe0d" type="checkbox"/> Galarian Moltres V (Rainbow) — Jet‑Black Spirit 088/070 — Rainbow Secret Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_2dd850532cd3edd4"><input data-key="2dd850532cd3edd4" id="cb_2dd850532cd3edd4" type="checkbox"/> Galarian Moltres (SWSH Promo 125) — SWSH Promo SWSH125 — Promo Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_603de9b7b521232a"><input data-key="603de9b7b521232a" id="cb_603de9b7b521232a" type="checkbox"/> Galarian Moltres ex (SWSH Promo 284) — SWSH Promo SWSH284 — Promo ex — EN</label></li>
+<li data-lang="EN"><label for="cb_9f7079d8926701f2"><input data-key="9f7079d8926701f2" id="cb_9f7079d8926701f2" type="checkbox"/> Moltres (Evolving Skies) — Evolving Skies 94/203 — Holo (Rare) — EN</label></li>
+<li data-lang="EN"><label for="cb_2b72a4b820f3060f"><input data-key="2b72a4b820f3060f" id="cb_2b72a4b820f3060f" type="checkbox"/> Moltres (Evolving Skies – Reverse) — Evolving Skies 94/203 — Reverse‑Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_1cfe4f8f3567cb31"><input data-key="1cfe4f8f3567cb31" id="cb_1cfe4f8f3567cb31" type="checkbox"/> Moltres (Eevee Heroes) — Eevee Heroes 038/069 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_a972c7bce8cf682f"><input data-key="a972c7bce8cf682f" id="cb_a972c7bce8cf682f" type="checkbox"/> Moltres (Celebrations Classic) — Celebrations 4/110 — Classic Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_ce9561f8c4dd080b"><input data-key="ce9561f8c4dd080b" id="cb_ce9561f8c4dd080b" type="checkbox"/> Moltres (Brilliant Stars – Gold) — Brilliant Stars 183/172 — Secret Gold Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_91ec54f93a4906c0"><input data-key="91ec54f93a4906c0" id="cb_91ec54f93a4906c0" type="checkbox"/> Moltres (VSTAR Universe Gold) — VSTAR Universe 209/172 — Secret Gold Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_387d3525626ce65f"><input data-key="387d3525626ce65f" id="cb_387d3525626ce65f" type="checkbox"/> Moltres (Astral Radiance TG20) — Astral Radiance TG20/TG30 — Trainer Gallery Full Art — EN</label></li>
+<li data-lang="JP"><label for="cb_ced229d87f2664ef"><input data-key="ced229d87f2664ef" id="cb_ced229d87f2664ef" type="checkbox"/> Moltres (Battle Region TG09) — Battle Region TG09/TG09 — Character Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_0a44a41dc6a3b041"><input data-key="0a44a41dc6a3b041" id="cb_0a44a41dc6a3b041" type="checkbox"/> Moltres (Pokémon GO) — Pokémon GO 18/78 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_61407236db92d3c3"><input data-key="61407236db92d3c3" id="cb_61407236db92d3c3" type="checkbox"/> Moltres (Pokémon GO) — Pokémon GO 016/071 — Holo (Rare) — JP</label></li>
+<li data-lang="JP"><label for="cb_8c9e9c68ef650e5e"><input data-key="8c9e9c68ef650e5e" id="cb_8c9e9c68ef650e5e" type="checkbox"/> Moltres ex (SV Promo 50) — SV Promo 050 — Promo ex — JP</label></li>
+<li data-lang="EN"><label for="cb_b7268a38afe9836f"><input data-key="b7268a38afe9836f" id="cb_b7268a38afe9836f" type="checkbox"/> Moltres (151 – Holo) — 151 146/165 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_d032df9fa488fdef"><input data-key="d032df9fa488fdef" id="cb_d032df9fa488fdef" type="checkbox"/> Moltres (151 – Holo) — SV2a 146/165 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_fcf8ecc1e71e44de"><input data-key="fcf8ecc1e71e44de" id="cb_fcf8ecc1e71e44de" type="checkbox"/> Moltres (151 – Full Art) — 151 193/165 — Full Art — EN</label></li>
+<li data-lang="JP"><label for="cb_507098f0c11c3c92"><input data-key="507098f0c11c3c92" id="cb_507098f0c11c3c92" type="checkbox"/> Moltres (151 – Full Art) — SV2a 193/165 — Full Art — JP</label></li>
+<li data-lang="EN"><label for="cb_ac8b0f2ec2d17d77"><input data-key="ac8b0f2ec2d17d77" id="cb_ac8b0f2ec2d17d77" type="checkbox"/> Moltres (151 – Special Illustration) — 151 203/165 — Special Illustration Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_e5e54422586a2f7e"><input data-key="e5e54422586a2f7e" id="cb_e5e54422586a2f7e" type="checkbox"/> Moltres (151 – Special Illustration) — SV2a 203/165 — Special Illustration Rare — JP</label></li>
+<li data-lang="EN"><label for="cb_03b1637642a1ca0a"><input data-key="03b1637642a1ca0a" id="cb_03b1637642a1ca0a" type="checkbox"/> Moltres (Twilight Masquerade) — Twilight Masquerade 46/167 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_a076fe668ba53e33"><input data-key="a076fe668ba53e33" id="cb_a076fe668ba53e33" type="checkbox"/> Moltres (JP Twilight Masquerade) — Mask of Change 046/102 — Holo (Rare) — JP</label></li>
+<li data-lang="JP"><label for="cb_492309634654973e"><input data-key="492309634654973e" id="cb_492309634654973e" type="checkbox"/> Galarian Moltres ex (SV Promo 44) — SV Promo 044 — Promo ex — JP</label></li>
+<li data-lang="EN"><label for="cb_16c664d61b3fe11e"><input data-key="16c664d61b3fe11e" id="cb_16c664d61b3fe11e" type="checkbox"/> Moltres ex (Stellar Crown) — Stellar Crown 142/146 — Holo ex — EN</label></li>
+<li data-lang="JP"><label for="cb_75c492673827037c"><input data-key="75c492673827037c" id="cb_75c492673827037c" type="checkbox"/> Moltres ex (SV4K) — Ancient Roar 074/066 — Holo ex — JP</label></li>
+<li data-lang="EN"><label for="cb_091ddef11774c3a6"><input data-key="091ddef11774c3a6" id="cb_091ddef11774c3a6" type="checkbox"/> Moltres (TCG Pocket) — Genetic Apex 104/226 — Prism ◊ (Non‑Holo) — EN</label></li>
+<li data-lang="JP"><label for="cb_d663e68b5e7c3d8b"><input data-key="d663e68b5e7c3d8b" id="cb_d663e68b5e7c3d8b" type="checkbox"/> Moltres (TCG Pocket) — Sparkling Squall 103/219 — Prism ◊ (Non‑Holo) — JP</label></li>
+<li data-lang="JP"><label for="cb_40db6c13387319f0"><input data-key="40db6c13387319f0" id="cb_40db6c13387319f0" type="checkbox"/> Moltres (Green Deck) — Green Deck – no.# — Non‑Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_c93d8200fd2d7f4c"><input data-key="c93d8200fd2d7f4c" id="cb_c93d8200fd2d7f4c" type="checkbox"/> Moltres (Promo Card P04) — Promotional Card P04 — Promo Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_7d471b33226421c8"><input data-key="7d471b33226421c8" id="cb_7d471b33226421c8" type="checkbox"/> Moltres (Promo Card P04) — Promotional Card P04 — Promo Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_21eb23097cb443e6"><input data-key="21eb23097cb443e6" id="cb_21eb23097cb443e6" type="checkbox"/> Moltres (Pokémon Web) — Pokémon Web 043/048 — Holo (Rare) — JP</label></li>
+<li data-lang="JP"><label for="cb_e48bd5bb488195be"><input data-key="e48bd5bb488195be" id="cb_e48bd5bb488195be" type="checkbox"/> Moltres (T Promo 013/T) — T Promotional 013/T — Promo Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_f97c3fe5d54bba35"><input data-key="f97c3fe5d54bba35" id="cb_f97c3fe5d54bba35" type="checkbox"/> Moltres (Skyridge Crystal) — Skyridge H20/H32 — Crystal‑type Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_5ac0aaf412bb65c8"><input data-key="5ac0aaf412bb65c8" id="cb_5ac0aaf412bb65c8" type="checkbox"/> Moltres (Mysterious Mountains Crystal) — Mysterious Mountains 019/088 — Crystal‑type Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_5d491e7ca1b4af07"><input data-key="5d491e7ca1b4af07" id="cb_5d491e7ca1b4af07" type="checkbox"/> Moltres (Skyridge – Non‑Holo) — Skyridge 21/144 — Non‑Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_64674cb73c01c424"><input data-key="64674cb73c01c424" id="cb_64674cb73c01c424" type="checkbox"/> Moltres (Mysterious Mountains – Non‑Holo) — Mysterious Mountains 018/088 — Non‑Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_f36a52f7e1da2052"><input data-key="f36a52f7e1da2052" id="cb_f36a52f7e1da2052" type="checkbox"/> Moltres (Fates Collide) — Fates Collide 9/124 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_518bb21ab885368c"><input data-key="518bb21ab885368c" id="cb_518bb21ab885368c" type="checkbox"/> Moltres (Awakening Psychic King) — Awakening Psychic King 008/078 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_a12166a940be2c5e"><input data-key="a12166a940be2c5e" id="cb_a12166a940be2c5e" type="checkbox"/> Moltres (Lost Thunder) — Lost Thunder 38/214 — Holo (Rare) — EN</label></li>
+<li data-lang="JP"><label for="cb_d3b9277cdbcef594"><input data-key="d3b9277cdbcef594" id="cb_d3b9277cdbcef594" type="checkbox"/> Moltres (Thunderclap Spark) — Thunderclap Spark 010/060 — Holo (Rare) — JP</label></li>
+<li data-lang="EN"><label for="cb_e282c6f425ac7cb7"><input data-key="e282c6f425ac7cb7" id="cb_e282c6f425ac7cb7" type="checkbox"/> Moltres (SM Promo SM143) — SM Black Star Promo SM143 — Promo Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_bcc474834c2c1f13"><input data-key="bcc474834c2c1f13" id="cb_bcc474834c2c1f13" type="checkbox"/> Moltres (Flareon‑GX Starter Set) — Flareon‑GX Starter Set Fire 002/038 — Promo Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_e6774899afcec1bb"><input data-key="e6774899afcec1bb" id="cb_e6774899afcec1bb" type="checkbox"/> Moltres (XY Promo XY127) — XY Black Star Promo XY127 — Promo Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_d2f7ce35aefdae6f"><input data-key="d2f7ce35aefdae6f" id="cb_d2f7ce35aefdae6f" type="checkbox"/> Moltres (Dream Shine Collection) — Mythical &amp; Legendary Dream Shine 005/036 — Promo Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_a2ac7cec20eb4645"><input data-key="a2ac7cec20eb4645" id="cb_a2ac7cec20eb4645" type="checkbox"/> Moltres (SWSH Promo SWSH185) — SWSH Promo SWSH185 — Promo Holo — EN</label></li>
+<li data-lang="JP"><label for="cb_acc5a27a281ed8f5"><input data-key="acc5a27a281ed8f5" id="cb_acc5a27a281ed8f5" type="checkbox"/> Moltres (Rayquaza VMAX Deck) — Charizard VSTAR vs Rayquaza VMAX Special Deck 007/030 — Promo Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_c10090d9a271f401"><input data-key="c10090d9a271f401" id="cb_c10090d9a271f401" type="checkbox"/> Moltres (VSTAR Universe AR) — VSTAR Universe 079/172 — Alternate Art Rare — JP</label></li>
+<li data-lang="JP"><label for="cb_ef2ad797c01ef2c2"><input data-key="ef2ad797c01ef2c2" id="cb_ef2ad797c01ef2c2" type="checkbox"/> Moltres (Start Deck 100 Gold) — Start Deck 100 254/414 — Secret Gold Rare — JP</label></li>
+<li data-lang="JP"><label for="cb_cb1cf5852dac560f"><input data-key="cb1cf5852dac560f" id="cb_cb1cf5852dac560f" type="checkbox"/> Moltres (Extra Regulation Box) — Extra Regulation Box 006/048 — Non‑Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_e7f7ff495fbca7f6"><input data-key="e7f7ff495fbca7f6" id="cb_e7f7ff495fbca7f6" type="checkbox"/> Moltres (Battle Master Deck) — Battle Master Deck Terastal Charizard ex 004/021 — Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_172183b1c678eaae"><input data-key="172183b1c678eaae" id="cb_172183b1c678eaae" type="checkbox"/> Team Rocket’s Moltres (Destined Rivals RR) — Destined Rivals 031/182 — Holo (RR) — EN</label></li>
+<li data-lang="JP"><label for="cb_54800ff415761e2b"><input data-key="54800ff415761e2b" id="cb_54800ff415761e2b" type="checkbox"/> Team Rocket’s Moltres (Glory of the Rocket Gang RR) — Glory of the Rocket Gang 015/098 — Holo (RR) — JP</label></li>
+<li data-lang="EN"><label for="cb_bc57ccd46004edb4"><input data-key="bc57ccd46004edb4" id="cb_bc57ccd46004edb4" type="checkbox"/> Team Rocket’s Moltres (Destined Rivals SR) — Destined Rivals 208/182 — Holo (SR) — EN</label></li>
+<li data-lang="JP"><label for="cb_8a3450939ae5bb2f"><input data-key="8a3450939ae5bb2f" id="cb_8a3450939ae5bb2f" type="checkbox"/> Team Rocket’s Moltres (Glory of the Rocket Gang SR) — Glory of the Rocket Gang 112/098 — Holo (SR) — JP</label></li>
+<li data-lang="EN"><label for="cb_b23e912f6d944938"><input data-key="b23e912f6d944938" id="cb_b23e912f6d944938" type="checkbox"/> Team Rocket’s Moltres (Destined Rivals SAR) — Destined Rivals 229/182 — Special Art Rare — EN</label></li>
+<li data-lang="JP"><label for="cb_d691c186b6bff924"><input data-key="d691c186b6bff924" id="cb_d691c186b6bff924" type="checkbox"/> Team Rocket’s Moltres (Glory of the Rocket Gang SAR) — Glory of the Rocket Gang 124/098 — Special Art Rare — JP</label></li>
+<li data-lang="MIX"><label for="cb_0af5069d654626b0"><input data-key="0af5069d654626b0" id="cb_0af5069d654626b0" type="checkbox"/> Total cards —  —  —  — **129 entries**</label></li>
+</ul></section>
+<section><h2>Non‑official &amp; vintage cards</h2><ul>
+<li data-lang="JP"><label for="cb_4d215b89090336f4"><input data-key="4d215b89090336f4" id="cb_4d215b89090336f4" type="checkbox"/> Zapdos (Bandai Carddass – Prism) — 1997 Bandai Carddass #145 — Prism Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_eff1635c9ebe2440"><input data-key="eff1635c9ebe2440" id="cb_eff1635c9ebe2440" type="checkbox"/> Zapdos (Bandai Carddass – Regular) — 1997 Bandai Carddass #145 — Non‑Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_a4d93c2b2c2e46a4"><input data-key="a4d93c2b2c2e46a4" id="cb_a4d93c2b2c2e46a4" type="checkbox"/> Zapdos (Topsun – Blue Back) — 1997 Topsun #145 — Non‑Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_9266336317dfdfcf"><input data-key="9266336317dfdfcf" id="cb_9266336317dfdfcf" type="checkbox"/> Zapdos (Topsun – Green Back) — 1997 Topsun #145 — Non‑Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_6acee6404bcbdb4d"><input data-key="6acee6404bcbdb4d" id="cb_6acee6404bcbdb4d" type="checkbox"/> Zapdos (Topps TV) — 2000 Topps TV #145 — Non‑Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_0b5310910e1ddebc"><input data-key="0b5310910e1ddebc" id="cb_0b5310910e1ddebc" type="checkbox"/> Zapdos (Topps Chrome) — 2000 Topps Chrome Series 1 — Holo Refractor — EN</label></li>
+<li data-lang="JP"><label for="cb_a91ab519b69bf3bd"><input data-key="a91ab519b69bf3bd" id="cb_a91ab519b69bf3bd" type="checkbox"/> Articuno (Bandai Carddass – Prism) — 1997 Bandai Carddass #144 — Prism Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_926b3c246ac59552"><input data-key="926b3c246ac59552" id="cb_926b3c246ac59552" type="checkbox"/> Articuno (Bandai Carddass – Regular) — 1997 Bandai Carddass #144 — Non‑Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_457c0a4292dff3b2"><input data-key="457c0a4292dff3b2" id="cb_457c0a4292dff3b2" type="checkbox"/> Articuno (Topsun – Blue Back) — 1997 Topsun #144 — Non‑Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_6efc28f2de9f386a"><input data-key="6efc28f2de9f386a" id="cb_6efc28f2de9f386a" type="checkbox"/> Articuno (Topsun – Green Back) — 1997 Topsun #144 — Non‑Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_11c2bf3012ad8142"><input data-key="11c2bf3012ad8142" id="cb_11c2bf3012ad8142" type="checkbox"/> Articuno (Topps TV) — 2000 Topps TV #144 — Non‑Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_27d5243648c2a525"><input data-key="27d5243648c2a525" id="cb_27d5243648c2a525" type="checkbox"/> Articuno (Topps Chrome) — 2000 Topps Chrome Series 1 — Holo Refractor — EN</label></li>
+<li data-lang="JP"><label for="cb_b02a06e860893758"><input data-key="b02a06e860893758" id="cb_b02a06e860893758" type="checkbox"/> Moltres (Bandai Carddass – Prism) — 1997 Bandai Carddass #146 — Prism Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_66d04b0bf4f62fde"><input data-key="66d04b0bf4f62fde" id="cb_66d04b0bf4f62fde" type="checkbox"/> Moltres (Bandai Carddass – Regular) — 1997 Bandai Carddass #146 — Non‑Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_ce81abd8fd70f300"><input data-key="ce81abd8fd70f300" id="cb_ce81abd8fd70f300" type="checkbox"/> Moltres (Topsun – Blue Back) — 1997 Topsun #146 — Non‑Holo — JP</label></li>
+<li data-lang="JP"><label for="cb_2c9e2f6883263216"><input data-key="2c9e2f6883263216" id="cb_2c9e2f6883263216" type="checkbox"/> Moltres (Topsun – Green Back) — 1997 Topsun #146 — Non‑Holo — JP</label></li>
+<li data-lang="EN"><label for="cb_f7c8f26dc33c0260"><input data-key="f7c8f26dc33c0260" id="cb_f7c8f26dc33c0260" type="checkbox"/> Moltres (Topps TV) — 2000 Topps TV #146 — Non‑Holo — EN</label></li>
+<li data-lang="EN"><label for="cb_89bca248557ab818"><input data-key="89bca248557ab818" id="cb_89bca248557ab818" type="checkbox"/> Moltres (Topps Chrome) — 2000 Topps Chrome Series 1 — Holo Refractor — EN</label></li>
+<li data-lang="EN"><label for="cb_2baee2608d905690"><input data-key="2baee2608d905690" id="cb_2baee2608d905690" type="checkbox"/> Warner Bros. Pokémon Promo — 2000 Warner Bros. Movie Promo — Holo (features all three birds) — EN</label></li>
+<li data-lang="MIX"><label for="cb_9a32e2530fb289a7"><input data-key="9a32e2530fb289a7" id="cb_9a32e2530fb289a7" type="checkbox"/> Total cards —  —  —  — **20 entries**</label></li>
+</ul></section>
+<script>
+(function(){
+  const STORAGE_PREFIX = 'bird_chk_';
+  // Test localStorage availability & persistence
+  let STORAGE_OK = true;
+  try {
+    const __k='bird_chk__test', __v=String(Date.now());
+    localStorage.setItem(__k, __v);
+    const back = localStorage.getItem(__k);
+    if (back !== __v) STORAGE_OK = false;
+    localStorage.removeItem(__k);
+  } catch(e){ STORAGE_OK = false; }
+  function flashSaved(){
+    const el = document.getElementById('saveStatus');
+    if(!el) return;
+    el.textContent = 'Saved ✓';
+    setTimeout(()=>{ el.textContent=''; }, 1200);
+  }
+  if(!STORAGE_OK){
+    const w = document.getElementById('storageWarning');
+    if(w) w.style.display = 'block';
+  }
+  // Restore states
+  document.querySelectorAll('input[type=checkbox][data-key]').forEach(cb => {
+    const key = STORAGE_PREFIX + cb.dataset.key;
+    const saved = STORAGE_OK ? localStorage.getItem(key) : null;
+    const checked = saved === '1';
+    cb.checked = checked;
+    cb.closest('li')?.classList.toggle('checked', checked);
+    cb.addEventListener('change', () => {
+      if(STORAGE_OK){ localStorage.setItem(key, cb.checked ? '1' : '0'); flashSaved(); }
+      cb.closest('li')?.classList.toggle('checked', cb.checked);
+    });
+  });
+
+  // Export
+  document.getElementById('btnExport').addEventListener('click', () => {
+    const data = {}; if(!STORAGE_OK){ alert('Note: Auto-save is disabled by your browser. Use Export to back up your progress.'); }
+    document.querySelectorAll('input[type=checkbox][data-key]').forEach(cb => {
+      data[cb.dataset.key] = cb.checked ? 1 : 0;
+    });
+    const blob = new Blob([JSON.stringify(data)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'legendary_birds_progress.json';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 0);
+  });
+
+  // Import
+  const fileInput = document.getElementById('importFile');
+  document.getElementById('btnImport').addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(reader.result);
+        Object.keys(data).forEach(k => {
+          const val = data[k] ? '1' : '0';
+          localStorage.setItem('bird_chk_' + k, val);
+        });
+        // Refresh UI
+        document.querySelectorAll('input[type=checkbox][data-key]').forEach(cb => {
+          const saved = STORAGE_OK ? localStorage.getItem('bird_chk_' + cb.dataset.key) === '1' : false;
+          cb.checked = saved;
+          cb.closest('li')?.classList.toggle('checked', saved);
+        });
+        alert('Progress imported!');
+      } catch(e){ alert('Import failed: invalid file.'); }
+    };
+    reader.readAsText(file);
+  });
+
+  // Clear
+  document.getElementById('btnClear').addEventListener('click', () => {
+    if(!confirm('Clear all saved checkmarks on this device?')) return;
+    if(STORAGE_OK){ Object.keys(localStorage).forEach(k => { if(k.startsWith(STORAGE_PREFIX)) localStorage.removeItem(k); }); }
+    document.querySelectorAll('input[type=checkbox][data-key]').forEach(cb => {
+      cb.checked = false;
+      cb.closest('li')?.classList.remove('checked');
+    });
+  });
+})();
+
+// Search & language filter
+(function(){
+  const q = document.getElementById('q');
+  const langSel = document.getElementById('langFilter');
+  function applyFilters(){
+    const needle = (q.value || '').toLowerCase();
+    const wantLang = langSel.value;
+    document.querySelectorAll('section li').forEach(li => {
+      const txt = li.textContent.toLowerCase();
+      const lang = li.getAttribute('data-lang') || 'all';
+      const matchText = !needle || txt.includes(needle);
+      const matchLang = (wantLang === 'all') || (lang === wantLang);
+      li.classList.toggle('hidden', !(matchText && matchLang));
+    });
+  }
+  q.addEventListener('input', applyFilters);
+  langSel.addEventListener('change', applyFilters);
+  applyFilters();
+})();</script></body></html>
