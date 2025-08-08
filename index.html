@@ -552,4 +552,231 @@ small.hint { display:block; color:#666; margin-top:.2rem; }
   q.addEventListener('input', applyFilters);
   langSel.addEventListener('change', applyFilters);
   applyFilters();
-})();</script></body></html>
+})();</script><script>
+
+// Legendary Bird Checklist add-on: counters + add-a-card (persists to localStorage)
+// Drop this file in your repo and include it in index.html before </body>:
+//   <script src="lb-addon.js?v=1"></script>
+(function(){
+  // ---- Inject styles ----
+  const css = `
+  .lb-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;z-index:1000}
+  .lb-modal{position:fixed;inset:auto 0 0 0;background:#fff;border-radius:14px 14px 0 0;padding:12px 14px;display:none;z-index:1001;max-height:75vh;overflow:auto}
+  .lb-row{display:flex;gap:.5rem;margin:.35rem 0;flex-wrap:wrap}
+  .lb-row input[type=text], .lb-row select{flex:1 1 180px;padding:.55rem;border:1px solid #ccc;border-radius:8px}
+  .lb-actions{display:flex;gap:.5rem;justify-content:flex-end;margin-top:.5rem}
+  .lb-btn{padding:.55rem .75rem;border:1px solid #ccc;border-radius:10px;background:#f7f7f7}
+  .lb-chip{font-size:.78rem;opacity:.75;margin-left:.35rem}
+  .lb-sec-count{font-weight:600;font-size:.9rem;margin-left:.4rem;opacity:.8}
+  #lbGlobalCount{margin-left:.5rem;font-weight:600}
+  .lb-del{margin-left:.35rem;border:none;background:transparent;font-size:1rem;line-height:1;color:#c33}
+  .lb-note{font-size:.8rem;opacity:.75;margin-top:.25rem}
+  @media (prefers-color-scheme: dark){
+    .lb-modal{background:#111418;color:#e6e6e6;border:1px solid #333}
+    .lb-btn{background:#1a1d24;border-color:#333;color:#e6e6e6}
+    .lb-row input[type=text], .lb-row select{background:#0f1115;color:#e6e6e6;border-color:#333}
+  }`;
+  const style = document.createElement('style'); style.textContent = css; document.head.appendChild(style);
+
+  const $ = (s, r=document) => r.querySelector(s);
+  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+  // Wait until your page structure exists
+  function ready(fn){ if (document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
+  ready(init);
+
+  function init(){
+    // --- Sections map by heading text (robust to extra spaces) ---
+    const sections = {};
+    $$('section').forEach(sec => {
+      const title = (sec.querySelector('h2')?.textContent || '').toLowerCase();
+      if (title.includes('zapdos')) sections['Zapdos'] = sec;
+      if (title.includes('articuno')) sections['Articuno'] = sec;
+      if (title.includes('moltres')) sections['Moltres'] = sec;
+    });
+
+    const getCardsIn = (sec) => $$('li input[type=checkbox]', sec?.querySelector('ul') || sec).map(cb => cb.closest('li'));
+
+    // Counters
+    function ensureSecCounter(sec){
+      if (!sec) return;
+      const h2 = sec.querySelector('h2'); if (!h2) return;
+      if (!h2.querySelector('.lb-sec-count')){
+        const span = document.createElement('span');
+        span.className = 'lb-sec-count';
+        span.textContent = '0/0';
+        h2.appendChild(span);
+      }
+    }
+
+    function updateCounters(){
+      let globalTotal = 0, globalChecked = 0;
+      Object.values(sections).forEach(sec => {
+        if (!sec) return;
+        ensureSecCounter(sec);
+        const items = getCardsIn(sec);
+        const total = items.length;
+        const checked = items.filter(li => li.querySelector('input[type=checkbox]').checked).length;
+        globalTotal += total; globalChecked += checked;
+        const span = sec.querySelector('.lb-sec-count');
+        if (span) span.textContent = `${checked}/${total}`;
+      });
+      let g = $('#lbGlobalCount');
+      if (!g){
+        g = document.createElement('span');
+        g.id = 'lbGlobalCount';
+        const bar = document.querySelector('.toolbar');
+        if (bar){
+          const strong = bar.querySelector('strong');
+          if (strong) strong.insertAdjacentElement('afterend', g);
+          else bar.appendChild(g);
+        }
+      }
+      g.textContent = `— Total: ${globalChecked}/${globalTotal}`;
+    }
+
+    document.addEventListener('change', (e)=>{
+      if (e.target && e.target.matches('input[type=checkbox]')) {
+        const li = e.target.closest('li');
+        if (li) li.classList.toggle('checked', e.target.checked);
+        updateCounters();
+        persistOwnCheckbox(e.target);
+      }
+    });
+
+    // Render counters once page paints
+    setTimeout(updateCounters, 50);
+
+    // --- Add Card feature (local only) ---
+    const LS_CARDS = 'lb_user_cards_v1';
+    const LS_CHECKS = 'lb_user_checks_v1';
+    const loadUserCards = () => { try { return JSON.parse(localStorage.getItem(LS_CARDS) || '[]'); } catch { return []; } };
+    const saveUserCards = (arr) => localStorage.setItem(LS_CARDS, JSON.stringify(arr));
+    const loadOwnChecks = () => { try { return JSON.parse(localStorage.getItem(LS_CHECKS) || '{}'); } catch { return {}; } };
+    const saveOwnChecks = (obj) => localStorage.setItem(LS_CHECKS, JSON.stringify(obj));
+
+    function uid(){ return Math.random().toString(36).slice(2) + Date.now().toString(36); }
+
+    function renderUserCard(card){
+      const sec = sections[card.section]; if (!sec) return;
+      const ul = sec.querySelector('ul'); if (!ul) return;
+
+      const li = document.createElement('li');
+      li.setAttribute('data-lang', card.lang);
+
+      const id = `cb_${card.id}`;
+      const chk = document.createElement('input');
+      chk.type = 'checkbox';
+      chk.id = id;
+      chk.setAttribute('data-key', card.id);
+
+      const lab = document.createElement('label');
+      lab.setAttribute('for', id);
+      lab.appendChild(chk);
+      lab.append(` ${card.text} `);
+
+      const del = document.createElement('button');
+      del.className = 'lb-del';
+      del.title = 'Remove this card';
+      del.textContent = '🗑️';
+      del.addEventListener('click', ()=>{
+        if (!confirm('Remove this card? This only removes it from this device.')) return;
+        li.remove();
+        const arr = loadUserCards().filter(c => c.id !== card.id); saveUserCards(arr);
+        const checks = loadOwnChecks(); delete checks[card.id]; saveOwnChecks(checks);
+        updateCounters();
+      });
+      lab.appendChild(del);
+
+      li.appendChild(lab);
+      ul.appendChild(li);
+
+      const checks = loadOwnChecks();
+      if (checks[card.id]) { chk.checked = true; li.classList.add('checked'); }
+    }
+
+    function renderAllUserCards(){
+      loadUserCards().forEach(renderUserCard);
+      updateCounters();
+    }
+    renderAllUserCards();
+
+    function persistOwnCheckbox(cb){
+      const key = cb.getAttribute('data-key');
+      if (!key) return;
+      const arr = loadUserCards();
+      if (!arr.some(c => c.id === key)) return; // not ours
+      const map = loadOwnChecks();
+      map[key] = !!cb.checked;
+      saveOwnChecks(map);
+    }
+
+    // Add button + bottom-sheet modal
+    function injectAddUI(){
+      const bar = document.querySelector('.toolbar'); if (!bar) return;
+      if ($('#lbOpenAdd')) return; // avoid duplicates
+
+      const addBtn = document.createElement('button');
+      addBtn.className = 'lb-btn';
+      addBtn.id = 'lbOpenAdd';
+      addBtn.textContent = 'Add';
+
+      const exportBtn = $('#btnExport');
+      if (exportBtn) exportBtn.insertAdjacentElement('beforebegin', addBtn);
+      else bar.appendChild(addBtn);
+
+      const backdrop = document.createElement('div'); backdrop.className = 'lb-modal-backdrop';
+      const modal = document.createElement('div'); modal.className = 'lb-modal';
+      modal.innerHTML = `
+        <h3 style="margin:.2rem 0 .4rem">Add a card</h3>
+        <div class="lb-row">
+          <input id="lbName" type="text" placeholder="Card & variant — Set # — Variant — Lang" />
+        </div>
+        <div class="lb-row">
+          <select id="lbSection">
+            <option value="Zapdos">Zapdos</option>
+            <option value="Articuno">Articuno</option>
+            <option value="Moltres">Moltres</option>
+          </select>
+          <select id="lbLang">
+            <option value="EN">EN</option>
+            <option value="JP">JP</option>
+          </select>
+        </div>
+        <div class="lb-actions">
+          <button class="lb-btn" id="lbCancel">Cancel</button>
+          <button class="lb-btn" id="lbAdd">Add</button>
+        </div>
+        <div class="lb-note">Saved only on this device. You can remove custom cards using the 🗑️ icon.</div>
+      `;
+      document.body.append(backdrop, modal);
+
+      const open = ()=>{ backdrop.style.display='block'; modal.style.display='block'; $('#lbName').focus(); };
+      const close = ()=>{ backdrop.style.display='none'; modal.style.display='none'; };
+      addBtn.addEventListener('click', open);
+      modal.querySelector('#lbCancel').addEventListener('click', close);
+      backdrop.addEventListener('click', close);
+
+      modal.querySelector('#lbAdd').addEventListener('click', ()=>{
+        const text = modal.querySelector('#lbName').value.trim();
+        const section = modal.querySelector('#lbSection').value;
+        const lang = modal.querySelector('#lbLang').value;
+        if (!text){ alert('Please enter the card text.'); return; }
+        const card = { id: uid(), section, lang, text };
+        const arr = loadUserCards(); arr.push(card); saveUserCards(arr);
+        renderUserCard(card);
+        updateCounters();
+        close();
+        modal.querySelector('#lbName').value = '';
+      });
+    }
+    injectAddUI();
+
+    // Keep counters accurate if other scripts mutate the DOM (imports, etc.)
+    const mo = new MutationObserver(()=>updateCounters());
+    mo.observe(document.body, {childList:true, subtree:true});
+  }
+})();
+
+</script>
+</body></html>
